@@ -871,3 +871,190 @@ oncology_sarcoid_like_reaction_evidence_safety_rule:
     - trigger_oncology_MDD_when_progression_vs_sarcoid_like_reaction_is_uncertain
     - require_full_source_review_before_public_release
 ```
+---
+
+## 19. GPA / ANCA-associated Vasculitis Evidence Update
+
+```yaml
+GPA_AAV_module_sources:
+  ACR_VF_2021_ANCA_ASSOCIATED_VASCULITIS_GUIDELINE:
+    title: 2021 American College of Rheumatology / Vasculitis Foundation Guideline for the Management of ANCA-Associated Vasculitis
+    organization:
+      - American College of Rheumatology
+      - Vasculitis Foundation
+    year: 2021
+    scope:
+      - management of GPA
+      - management of MPA
+      - management of EGPA
+      - remission induction
+      - remission maintenance
+      - adjunctive treatment strategies
+    platform_use:
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+      - future_GPA_granulomatous_vasculitis_pattern_v1
+    evidence_role: management_guideline
+    full_text_review_required: true
+    diagnostic_boundary:
+      - supports_AAV_management_context
+      - does_not_create_imaging_only_diagnostic_authority
+      - should_not_be_used_to_diagnose_GPA_from_CT_alone
+      - ANCA_context_must_be_interpreted_with_clinical_renal_ENT_airway_and_pathology_context
+
+  EULAR_2022_ANCA_ASSOCIATED_VASCULITIS_RECOMMENDATIONS:
+    title: EULAR recommendations for the management of ANCA-associated vasculitis: 2022 update
+    organization:
+      - European Alliance of Associations for Rheumatology
+    year: 2022
+    publication_year: 2024
+    scope:
+      - adult ANCA-associated vasculitis
+      - diagnosis and treatment context
+      - ANCA testing context
+      - remission induction and maintenance
+      - glucocorticoid-sparing strategies
+      - infection prevention considerations
+    platform_use:
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+      - future_GPA_granulomatous_vasculitis_pattern_v1
+      - future_vasculitis_red_flag_panel
+    evidence_role: recommendation_statement
+    full_text_review_required: true
+    diagnostic_boundary:
+      - supports_AAV_context_and_recommendation_scope
+      - does_not_replace_rheumatology_nephrology_or_MDD_review
+      - ANCA_testing_context_is_not_standalone_diagnosis
+
+  GPA_THORACIC_MANIFESTATIONS_RADIOGRAPHICS_REVIEW:
+    title: Common and Uncommon Manifestations of Wegener Granulomatosis at Chest CT
+    year: 2012
+    publication:
+      journal: RadioGraphics
+    scope:
+      - thoracic GPA imaging manifestations
+      - pulmonary nodules and masses
+      - cavitation
+      - ground-glass opacity
+      - consolidation
+      - airway involvement
+      - systemic context
+    platform_use:
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+      - future_GPA_granulomatous_vasculitis_pattern_v1
+      - red_flag_panel_future_module
+    evidence_role: imaging_review
+    full_text_review_required: true
+    diagnostic_boundary:
+      - supports_thoracic_imaging_pattern_awareness
+      - does_not_diagnose_GPA_without_clinical_laboratory_pathology_context
+      - infection_malignancy_septic_emboli_and_rheumatoid_nodules_remain_mimics
+
+  GPA_HRCT_THORACIC_MANIFESTATIONS_AJR_REVIEW:
+    title: Wegener Granulomatosis in the Chest: High-Resolution CT Findings
+    year: source_review_pending
+    scope:
+      - HRCT thoracic manifestations of GPA
+      - nodules
+      - cavitation
+      - ground-glass opacity related to hemorrhage
+      - airway stenosis or ulceration
+    platform_use:
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+      - future_GPA_granulomatous_vasculitis_pattern_v1
+    evidence_role: candidate_imaging_review
+    full_text_review_required: true
+    citation_status: needs_verification
+    diagnostic_boundary:
+      - candidate_source_only
+      - cannot_support_public_ready_claim_until_reviewed
+
+  NON_INFECTIOUS_GRANULOMATOUS_LUNG_DISEASE_REVIEW:
+    title: Non-Infectious Granulomatous Lung Disease
+    year: 2021
+    scope:
+      - noninfectious granulomatous lung disease
+      - sarcoidosis and mimics
+      - granulomatous differential diagnosis
+      - imaging-pathology correlation
+    platform_use:
+      - granulomatous_ild_reasoning_map_v1
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+      - sarcoidosis_pattern_taxonomy_v1
+    evidence_role: peer_reviewed_imaging_review
+    full_text_review_required: true
+    diagnostic_boundary:
+      - supports_granulomatous_mimic_awareness
+      - does_not_replace_disease_specific_guidelines
+      - should_be_used_as_context_not_final_authority
+```
+
+---
+
+## 20. GPA / Vasculitis Module-to-Evidence Mapping
+
+```yaml
+GPA_vasculitis_module_to_evidence_mapping:
+  sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1:
+    primary_context_sources:
+      - ATS_2020_SARCOIDOSIS_DIAGNOSIS_DETECTION
+      - ACR_VF_2021_ANCA_ASSOCIATED_VASCULITIS_GUIDELINE
+      - EULAR_2022_ANCA_ASSOCIATED_VASCULITIS_RECOMMENDATIONS
+    supportive_imaging_sources:
+      - GPA_THORACIC_MANIFESTATIONS_RADIOGRAPHICS_REVIEW
+      - GPA_HRCT_THORACIC_MANIFESTATIONS_AJR_REVIEW
+      - NON_INFECTIOUS_GRANULOMATOUS_LUNG_DISEASE_REVIEW
+    scope_note:
+      - ATS_2020_supports_sarcoidosis_diagnostic_framework_and_mimic_exclusion.
+      - ACR_VF_2021_and_EULAR_2022_support_AAV_management_and_context_not_CT_only_diagnosis.
+      - GPA_imaging_reviews_support_red_flag_awareness_for_cavitation_airway_disease_DAH_and_nodular_patterns.
+      - Infection_malignancy_septic_emboli_and_rheumatoid_nodule_contexts_must_remain_visible.
+
+  granulomatous_ild_reasoning_map_v1:
+    added_sources:
+      - ACR_VF_2021_ANCA_ASSOCIATED_VASCULITIS_GUIDELINE
+      - EULAR_2022_ANCA_ASSOCIATED_VASCULITIS_RECOMMENDATIONS
+      - GPA_THORACIC_MANIFESTATIONS_RADIOGRAPHICS_REVIEW
+    scope_note:
+      - Cavitating_nodules_destructive_ENT_airway_renal_or_ANCA_context_must_route_to_vasculitis_review.
+      - ANCA_is_contextual_evidence_not_standalone_diagnostic_authority.
+
+  future_GPA_granulomatous_vasculitis_pattern_v1:
+    required_sources:
+      - ACR_VF_2021_ANCA_ASSOCIATED_VASCULITIS_GUIDELINE
+      - EULAR_2022_ANCA_ASSOCIATED_VASCULITIS_RECOMMENDATIONS
+      - GPA_THORACIC_MANIFESTATIONS_RADIOGRAPHICS_REVIEW
+      - GPA_HRCT_THORACIC_MANIFESTATIONS_AJR_REVIEW
+    required_caution:
+      - public_ready_status_requires_rheumatology_or_vasculitis_expert_review
+      - imaging_findings_are_not_standalone_diagnostic_authority
+      - ANCA_testing_requires_clinical_context
+      - renal_ENT_airway_pathology_and_microbiology_context_must_remain_visible
+```
+
+---
+
+## 21. GPA / Vasculitis Evidence Safety Rule
+
+```yaml
+GPA_vasculitis_evidence_safety_rule:
+  platform_must_not:
+    - diagnose_GPA_from_cavitating_nodules_alone
+    - diagnose_GPA_from_ANCA_alone
+    - call_cavitating_nodules_atypical_sarcoidosis_without_vasculitis_infection_malignancy_review
+    - ignore_destructive_sinonasal_disease
+    - ignore_subglottic_or_tracheobronchial_stenosis
+    - ignore_hemoptysis_or_DAH_context
+    - ignore_urinalysis_creatinine_or_glomerulonephritis_context
+    - use_AAV_treatment_guidelines_as_CT_pattern_diagnostic_authority
+    - hide_candidate_source_or_full_text_review_pending_status
+
+  platform_must:
+    - label_ACR_VF_2021_as_AAV_management_guideline
+    - label_EULAR_2022_as_AAV_recommendation_context
+    - label_GPA_imaging_reviews_as_pattern_awareness_sources
+    - keep_infection_malignancy_septic_emboli_and_rheumatoid_nodules_visible
+    - preserve_uncertainty_when_ANCA_urinalysis_renal_ENT_or_prior_CT_data_are_unavailable
+    - trigger_rheumatology_nephrology_ENT_microbiology_or_MDD_review_when_signals_overlap
+    - require_full_source_review_before_public_release
+```
