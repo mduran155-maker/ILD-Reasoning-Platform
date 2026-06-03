@@ -432,3 +432,90 @@ granulomatous_next_step_priority:
     - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction
     - fibrotic_sarcoidosis_vs_chronic_HP
 ```
+---
+
+## 13. GLILD Gray-Zone Module Sync
+
+```yaml
+implemented_granulomatous_gray_zone_modules_update:
+  sarcoidosis_vs_GLILD:
+    path: docs/reasoning/sarcoidosis_vs_glild_gray_zone_v1.md
+    role: immune_deficiency_granulomatous_gray_zone
+    status: implemented
+    linked_pattern:
+      - sarcoidosis_pattern_gold_standard_v1
+    linked_reasoning_map:
+      - granulomatous_ild_reasoning_map_v1
+    core_safety_question:
+      - Is there CVID, primary antibody deficiency, recurrent infection, hypogammaglobulinemia, splenomegaly, cytopenia, or lymphoproliferative context before calling this sarcoidosis?
+
+updated_completed_granulomatous_modules:
+  - granulomatous_ild_reasoning_map_v1
+  - sarcoidosis_pattern_gold_standard_v1
+  - sarcoidosis_pattern_taxonomy_v1
+  - sarcoidosis_vs_granulomatous_infection_gray_zone_v1
+  - sarcoidosis_vs_hypersensitivity_pneumonitis_gray_zone_v1
+  - sarcoidosis_vs_glild_gray_zone_v1
+
+remaining_high_priority_granulomatous_gray_zones:
+  - sarcoidosis_vs_berylliosis_or_pneumoconiosis
+  - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction
+  - fibrotic_sarcoidosis_vs_chronic_HP
+  - sarcoidosis_vs_GPA_or_granulomatous_vasculitis
+```
+
+---
+
+## 14. Updated Granulomatous Routing Logic
+
+```yaml
+updated_granulomatous_routing_logic:
+  if_user_starts_with_sarcoidosis_like_pattern_and_recurrent_infections:
+    route_to:
+      - sarcoidosis_vs_glild_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - immune_deficiency_and_GLILD_review
+
+  if_user_starts_with_sarcoidosis_like_pattern_and_hypogammaglobulinemia:
+    route_to:
+      - sarcoidosis_vs_glild_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - CVID_or_primary_antibody_deficiency_review
+
+  if_user_starts_with_sarcoidosis_like_pattern_and_splenomegaly_or_cytopenias:
+    route_to:
+      - sarcoidosis_vs_glild_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - GLILD_lymphoproliferative_or_lymphoma_review
+
+  if_user_starts_with_granulomas_and_immune_deficiency_context:
+    route_to:
+      - sarcoidosis_vs_glild_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - granulomas_do_not_equal_simple_sarcoidosis
+```
+
+---
+
+## 15. Updated Granulomatous Safety Boundary
+
+```yaml
+updated_granulomatous_safety_boundary:
+  platform_must_not:
+    - diagnose_sarcoidosis_without_considering_GLILD_when_immune_deficiency_context_exists
+    - ignore_recurrent_sinopulmonary_infections
+    - ignore_hypogammaglobulinemia
+    - ignore_CVID_or_primary_antibody_deficiency_context
+    - ignore_splenomegaly_cytopenias_or_lymphoproliferative_features
+    - treat_granulomas_as_sarcoidosis_without_immune_microbiology_and_pathology_context
+
+  platform_must:
+    - route_sarcoidosis_like_imaging_with_immune_deficiency_clues_to_GLILD_review
+    - keep_infection_and_lymphoma_malignancy_visible_in_CVID_GLILD_context
+    - preserve_uncertainty_when_immunoglobulin_status_is_unknown
+    - trigger_MDD_when_sarcoidosis_GLILD_infection_or_lymphoma_signals_overlap
+```
