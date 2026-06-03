@@ -392,3 +392,154 @@ Before applying to a patient, ask:
 5. Is MDD or specialist review needed?
 6. What do we still not know?
 ```
+---
+
+## 10. Granulomatous ILD / Sarcoidosis Module Update
+
+```yaml
+granulomatous_ild_module_sources:
+  ATS_2020_SARCOIDOSIS_DIAGNOSIS_DETECTION:
+    title: Diagnosis and Detection of Sarcoidosis
+    organization:
+      - American Thoracic Society
+    year: 2020
+    publication:
+      journal: American Journal of Respiratory and Critical Care Medicine
+      volume: 201
+      issue: 8
+      pages: e26-e51
+    scope:
+      - sarcoidosis diagnosis
+      - compatible clinical presentation
+      - nonnecrotizing granulomatous inflammation
+      - exclusion of alternative granulomatous disease
+      - detection of selected extrapulmonary disease
+    platform_use:
+      - sarcoidosis_pattern_gold_standard_v1
+      - granulomatous_ild_reasoning_map_v1
+      - granulomatous_crosslink_registry_v1
+      - source_review_protocol_v1
+    evidence_role: primary_diagnostic_guideline
+    full_text_review_required: true
+    diagnostic_boundary:
+      - supports_sarcoidosis_reasoning_framework
+      - does_not_allow_imaging_only_diagnosis
+      - requires_alternative_granulomatous_causes_to_remain_visible
+
+  BTS_2021_PULMONARY_SARCOIDOSIS_CLINICAL_STATEMENT:
+    title: BTS Clinical Statement on Pulmonary Sarcoidosis
+    organization:
+      - British Thoracic Society
+    year: 2021
+    publication:
+      journal: Thorax
+      volume: 76
+      issue: 1
+      pages: 4-20
+    scope:
+      - pulmonary sarcoidosis diagnosis
+      - evaluation
+      - management context
+      - clinical practice points
+    platform_use:
+      - sarcoidosis_pattern_gold_standard_v1
+      - granulomatous_ild_reasoning_map_v1
+      - granulomatous_crosslink_registry_v1
+    evidence_role: clinical_statement
+    full_text_review_required: true
+    diagnostic_boundary:
+      - supports_pulmonary_sarcoidosis_context
+      - does_not_replace_ATS_diagnostic_framework
+      - does_not_remove_need_for_mimic_review
+
+  ERS_2021_SARCOIDOSIS_TREATMENT:
+    title: ERS Clinical Practice Guidelines on Treatment of Sarcoidosis
+    organization:
+      - European Respiratory Society
+    year: 2021
+    publication:
+      journal: European Respiratory Journal
+      volume: 58
+      article: 2004079
+    scope:
+      - treatment of sarcoidosis
+      - organ involvement
+      - morbidity and mortality risk
+      - quality of life impact
+      - treatment toxicity consideration
+    platform_use:
+      - future_sarcoidosis_treatment_response_reasoning
+      - patient_communication_future_module
+      - guideline_scope_warning
+    evidence_role: treatment_guideline
+    full_text_review_required: true
+    diagnostic_boundary:
+      - must_not_be_used_as_diagnostic_authority
+      - supports_treatment_context_only
+```
+
+---
+
+## 11. Granulomatous Module-to-Guideline Mapping
+
+```yaml
+granulomatous_module_to_guideline_mapping:
+  sarcoidosis_pattern_gold_standard_v1:
+    primary_sources:
+      - ATS_2020_SARCOIDOSIS_DIAGNOSIS_DETECTION
+      - BTS_2021_PULMONARY_SARCOIDOSIS_CLINICAL_STATEMENT
+    secondary_sources:
+      - ERS_2021_SARCOIDOSIS_TREATMENT
+    scope_note:
+      - ATS_2020_supports_diagnostic_framework
+      - BTS_2021_supports_pulmonary_sarcoidosis_context
+      - ERS_2021_is_treatment_scope_only
+
+  granulomatous_ild_reasoning_map_v1:
+    primary_sources:
+      - ATS_2020_SARCOIDOSIS_DIAGNOSIS_DETECTION
+      - ATS_JRS_ALAT_2020_HP_DIAGNOSIS
+    secondary_sources:
+      - BTS_2021_PULMONARY_SARCOIDOSIS_CLINICAL_STATEMENT
+    future_sources_needed:
+      - GLILD_consensus_or_review_source
+      - berylliosis_occupational_granulomatous_disease_source
+      - granulomatous_infection_review_source
+      - GPA_vasculitis_source
+    scope_note:
+      - sarcoidosis_reasoning_requires_mimic_review
+      - HP_reasoning_requires_exposure_HRCT_BAL_MDD_context
+      - infection_malignancy_GLILD_occupational_mimics_need_dedicated_sources_before_public_release
+
+  granulomatous_crosslink_registry_v1:
+    primary_sources:
+      - ATS_2020_SARCOIDOSIS_DIAGNOSIS_DETECTION
+      - BTS_2021_PULMONARY_SARCOIDOSIS_CLINICAL_STATEMENT
+    scope_note:
+      - navigation_contract_only
+      - does_not_create_diagnostic_authority
+```
+
+---
+
+## 12. Granulomatous Evidence Safety Rule
+
+```yaml
+granulomatous_evidence_safety_rule:
+  platform_must_not:
+    - diagnose_sarcoidosis_from_imaging_alone
+    - use_ERS_treatment_guideline_as_diagnostic_authority
+    - ignore_granulomatous_infection
+    - ignore_occupational_mimics
+    - ignore_GLILD_or_immune_deficiency_context
+    - ignore_malignancy_or_sarcoid_like_reaction
+    - hide_need_for_full_source_review
+
+  platform_must:
+    - show_ATS_diagnostic_framework
+    - keep_mimics_visible
+    - label_BTS_as_clinical_statement_context
+    - label_ERS_as_treatment_scope_only
+    - preserve_uncertainty
+    - trigger_MDD_when_pattern_and_context_conflict
+```
