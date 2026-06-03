@@ -843,3 +843,200 @@ updated_vascular_edema_hemorrhage_safety_boundary:
     - preserve_uncertainty_when_prior_CT_cardiac_renal_vascular_or_hemorrhage_data_are_missing
     - trigger_urgent_review_when_edema_PE_DAH_AE_infection_or_drug_toxicity_overlap_in_unstable_patient
 ```
+---
+
+## 23. Temporal Comparison Methodology Module Sync
+
+```yaml
+implemented_superimposed_event_modules_update:
+  temporal_comparison_methodology:
+    path: docs/reasoning/temporal_comparison_methodology_v1.md
+    role: prior_CT_change_interpretation_and_temporal_reasoning_methodology
+    status: implemented
+    linked_reasoning_maps:
+      - superimposed_events_core_blueprint_v1
+      - superimposed_infection_on_ILD_background_v1
+      - acute_exacerbation_vs_infection_vs_edema_v1
+      - organizing_pneumonia_on_ILD_background_v1
+      - malignancy_on_fibrotic_ILD_background_v1
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - vascular_edema_hemorrhage_mimic_panel_v1
+      - fibrotic_ild_triage_map_v1
+    core_safety_question:
+      - What truly changed compared with prior CT, over what interval, and is that change structural fibrosis, reversible opacity, technical difference, or superimposed disease?
+
+updated_completed_superimposed_event_modules:
+  - superimposed_events_core_blueprint_v1
+  - superimposed_infection_on_ILD_background_v1
+  - acute_exacerbation_vs_infection_vs_edema_v1
+  - organizing_pneumonia_on_ILD_background_v1
+  - malignancy_on_fibrotic_ILD_background_v1
+  - drug_toxicity_treatment_related_lung_injury_v1
+  - vascular_edema_hemorrhage_mimic_panel_v1
+  - temporal_comparison_methodology_v1
+
+remaining_high_priority_superimposed_event_modules:
+  - none_for_v0_3_core
+```
+
+---
+
+## 24. Updated Temporal Comparison Routing Logic
+
+```yaml
+updated_temporal_comparison_routing_logic:
+  if_user_starts_with_prior_CT_comparison_question:
+    route_to:
+      - temporal_comparison_methodology_v1
+      - superimposed_events_core_blueprint_v1
+    required_prompt:
+      - Determine what is new, increased, decreased, resolved, migrated, persistent, stable, or technically uncertain.
+
+  if_user_starts_with_possible_progression:
+    route_to:
+      - temporal_comparison_methodology_v1
+      - fibrotic_ild_triage_map_v1
+      - superimposed_events_core_blueprint_v1
+    required_prompt:
+      - Separate structural fibrotic progression from reversible superimposed opacity before calling progression.
+
+  if_user_starts_with_new_GGO_or_consolidation_compared_with_prior_CT:
+    route_to:
+      - temporal_comparison_methodology_v1
+      - acute_exacerbation_vs_infection_vs_edema_v1
+      - superimposed_infection_on_ILD_background_v1
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - vascular_edema_hemorrhage_mimic_panel_v1
+    required_prompt:
+      - New GGO or consolidation is not automatically progression and requires superimposed event review.
+
+  if_user_starts_with_decreased_GGO_or_consolidation:
+    route_to:
+      - temporal_comparison_methodology_v1
+      - superimposed_events_core_blueprint_v1
+    required_prompt:
+      - Improvement of reversible opacity should not be equated with reversal of established fibrosis.
+
+  if_user_starts_with_persistent_focal_opacity:
+    route_to:
+      - temporal_comparison_methodology_v1
+      - malignancy_on_fibrotic_ILD_background_v1
+      - organizing_pneumonia_on_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+    required_prompt:
+      - Persistent focal opacity requires malignancy, chronic infection, OP, atelectasis, infarct, and treatment-context review.
+
+  if_user_starts_with_migratory_or_waxing_waning_opacity:
+    route_to:
+      - temporal_comparison_methodology_v1
+      - organizing_pneumonia_on_ILD_background_v1
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - superimposed_infection_on_ILD_background_v1
+    required_prompt:
+      - Migration supports inflammatory behavior but does not prove OP or exclude infection, drug toxicity, or aspiration.
+
+  if_user_starts_with_new_or_growing_nodule:
+    route_to:
+      - temporal_comparison_methodology_v1
+      - malignancy_on_fibrotic_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+    required_prompt:
+      - New or growing nodule should not be hidden inside fibrosis, scar, or baseline ILD label.
+
+  if_user_starts_with_technical_difference_between_CT_studies:
+    route_to:
+      - temporal_comparison_methodology_v1
+    required_prompt:
+      - Technique, inspiration, slice thickness, reconstruction, contrast, motion, and positioning must be reviewed before declaring biological change.
+```
+
+---
+
+## 25. Updated Temporal Reasoning Safety Boundary
+
+```yaml
+updated_temporal_reasoning_safety_boundary:
+  platform_must_not:
+    - call_progression_from_a_single_CT_snapshot
+    - call_regression_without_separating_reversible_opacity_from_structural_fibrosis
+    - call_stability_without_technical_comparability_review
+    - call_new_GGO_fibrotic_progression_without_superimposed_event_review
+    - call_new_or_growing_nodule_scar_without_prior_CT_growth_and_morphology_review
+    - treat_migratory_opacity_as_diagnostic_of_OP
+    - treat_persistent_focal_opacity_as_benign_without_malignancy_chronic_infection_and_OP_review
+    - ignore_CT_technical_factors_when_apparent_change_is_subtle_or_discordant
+    - let_baseline_ILD_label_swallow_new_temporal_change
+
+  platform_must:
+    - request_prior_CT_when_temporal_reasoning_is_required
+    - classify_change_as_new_increased_decreased_resolved_migrated_persistent_stable_morphologically_changed_or_technically_uncertain
+    - separate_structural_fibrosis_from_reversible_airspace_opacity
+    - match_change_type_to_time_interval
+    - review_technical_comparability_before declaring progression_or_regression
+    - route_new_airspace_opacity_to_superimposed_event_review
+    - route_new_or_growing_focal_abnormality_to_malignancy_and_infection_review
+    - preserve_uncertainty_when_prior_CT_or_technical_comparability_is_missing
+    - trigger_MDD_when temporal_change_and_clinical_context_conflict
+```
+
+---
+
+## 26. v0.3 Superimposed Events Core Completion Status
+
+```yaml
+v0_3_superimposed_events_core_completion_status:
+  module: Superimposed Events Core
+  status: core_architecture_complete_blueprint
+  public_ready: false
+  clinical_use: educational_reasoning_support_only
+  diagnostic_authority: none
+  expert_review_required: true
+  full_source_review_required: true
+
+  completed_core_modules:
+    - superimposed_events_core_blueprint_v1
+    - superimposed_infection_on_ILD_background_v1
+    - acute_exacerbation_vs_infection_vs_edema_v1
+    - organizing_pneumonia_on_ILD_background_v1
+    - malignancy_on_fibrotic_ILD_background_v1
+    - drug_toxicity_treatment_related_lung_injury_v1
+    - vascular_edema_hemorrhage_mimic_panel_v1
+    - temporal_comparison_methodology_v1
+
+  core_coverage:
+    - infection_on_ILD_background
+    - acute_exacerbation_vs_infection_vs_edema
+    - organizing_pneumonia_like_opacity
+    - malignancy_or_focal_lesion_on_fibrotic_background
+    - drug_toxicity_or_treatment_related_lung_injury
+    - edema_PE_infarct_DAH_and_vascular_mimics
+    - prior_CT_temporal_comparison_methodology
+
+  remaining_high_priority_modules_for_v0_3_core:
+    - none
+
+  next_recommended:
+    module: superimposed_events_core_lock_checklist_v1
+    path: docs/data/schema/superimposed_events_core_lock_checklist_v1.md
+    reason:
+      - v0.3 now has its central blueprint, major superimposed event families, routing registry, and temporal methodology.
+      - A lock checklist should verify file presence, crosslinks, missing-piece coverage, red-flag coverage, and safety boundaries before sealing.
+```
+
+---
+
+## 27. Final v0.3 Crosslink Rule
+
+```yaml
+final_v0_3_crosslink_rule:
+  every_superimposed_events_pathway_must_ask:
+    - What is the baseline ILD pattern?
+    - What is new compared with prior CT?
+    - Is the current and prior CT technically comparable?
+    - Is the change structural fibrosis or reversible airspace opacity?
+    - Did the change occur over hours, days, weeks, months, or years?
+    - Is infection, acute exacerbation, edema, PE, hemorrhage, OP, drug toxicity, aspiration, malignancy, or exposure recurrence still possible?
+    - What clinical, microbiologic, cardiac, renal, medication, oncology, immune, exposure, vascular, or temporal data are missing?
+    - Is urgent review, follow-up, sampling, specialist review, or MDD needed?
+    - What do we still not know?
+```
