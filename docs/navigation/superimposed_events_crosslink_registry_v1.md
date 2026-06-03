@@ -734,3 +734,112 @@ updated_drug_toxicity_treatment_related_lung_injury_safety_boundary:
     - preserve_uncertainty_when_prior_CT_treatment_dates_or_microbiology_are_unavailable
     - trigger_oncology_rheumatology_infectious_disease_or_MDD_review_when_signals_overlap
 ```
+---
+
+## 20. Vascular / Edema / Hemorrhage Mimic Panel Sync
+
+```yaml
+implemented_superimposed_event_modules_update:
+  vascular_edema_hemorrhage_mimic_panel:
+    path: docs/reasoning/vascular_edema_hemorrhage_mimic_panel_v1.md
+    role: vascular_edema_DAH_PE_infarct_mimic_reasoning_panel
+    status: implemented
+    linked_reasoning_maps:
+      - superimposed_events_core_blueprint_v1
+      - acute_exacerbation_vs_infection_vs_edema_v1
+      - superimposed_infection_on_ILD_background_v1
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - organizing_pneumonia_on_ILD_background_v1
+      - malignancy_on_fibrotic_ILD_background_v1
+    core_safety_question:
+      - Is this truly AE, infection, OP, drug toxicity, or progression, or could edema, PE/infarct, pulmonary hypertension decompensation, hemorrhage, or pulmonary-renal vasculitis explain the acute change?
+
+updated_completed_superimposed_event_modules:
+  - superimposed_events_core_blueprint_v1
+  - superimposed_infection_on_ILD_background_v1
+  - acute_exacerbation_vs_infection_vs_edema_v1
+  - organizing_pneumonia_on_ILD_background_v1
+  - malignancy_on_fibrotic_ILD_background_v1
+  - drug_toxicity_treatment_related_lung_injury_v1
+  - vascular_edema_hemorrhage_mimic_panel_v1
+
+remaining_high_priority_superimposed_event_modules:
+  - temporal_comparison_methodology_v1
+```
+
+---
+
+## 21. Updated Vascular / Edema / Hemorrhage Routing Logic
+
+```yaml
+updated_vascular_edema_hemorrhage_routing_logic:
+  if_user_starts_with_smooth_septal_GGO_or_pleural_effusions:
+    route_to:
+      - vascular_edema_hemorrhage_mimic_panel_v1
+      - acute_exacerbation_vs_infection_vs_edema_v1
+    required_prompt:
+      - Smooth_septal_GGO_or_effusions_require_cardiac_renal_volume_and_edema_review_before_AE_or_infection_labeling
+
+  if_user_starts_with_peripheral_wedge_or_pleural_based_opacity:
+    route_to:
+      - vascular_edema_hemorrhage_mimic_panel_v1
+      - organizing_pneumonia_on_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+      - malignancy_on_fibrotic_ILD_background_v1
+    required_prompt:
+      - Peripheral_wedge_like_opacity_requires_PE_infarct_OP_infection_and_malignancy_review
+
+  if_user_starts_with_acute_diffuse_GGO_and_hemoptysis_or_anemia:
+    route_to:
+      - vascular_edema_hemorrhage_mimic_panel_v1
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+      - drug_toxicity_treatment_related_lung_injury_v1
+    required_prompt:
+      - Acute_diffuse_GGO_with_hemoptysis_or_anemia_requires_DAH_anticoagulation_vasculitis_and_drug_review
+
+  if_user_starts_with_acute_decline_disproportionate_to_CT_change:
+    route_to:
+      - vascular_edema_hemorrhage_mimic_panel_v1
+      - acute_exacerbation_vs_infection_vs_edema_v1
+    required_prompt:
+      - Disproportionate_decline_requires_PE_pulmonary_hypertension_cardiac_edema_infection_and_AE_review
+
+  if_user_starts_with_pulmonary_renal_or_vasculitic_context:
+    route_to:
+      - vascular_edema_hemorrhage_mimic_panel_v1
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+    required_prompt:
+      - Pulmonary_renal_context_requires_DAH_AAV_GPA_renal_urinalysis_and_rheumatology_review
+
+  if_user_starts_with_rapid_GGO_improvement_after_diuresis_or_volume_change:
+    route_to:
+      - vascular_edema_hemorrhage_mimic_panel_v1
+      - acute_exacerbation_vs_infection_vs_edema_v1
+    required_prompt:
+      - Rapid_improvement_supports_edema_context_but_does_not_alone_prove_edema_without_clinical_review
+```
+
+---
+
+## 22. Updated Vascular / Edema / Hemorrhage Safety Boundary
+
+```yaml
+updated_vascular_edema_hemorrhage_safety_boundary:
+  platform_must_not:
+    - call_smooth_septal_GGO_acute_exacerbation_without_edema_volume_review
+    - call_peripheral_wedge_opacity_pneumonia_or_OP_without_PE_infarct_review
+    - ignore_PE_when_acute_decline_is_disproportionate_to_CT_change
+    - ignore_pulmonary_hypertension_or_right_heart_decompensation_in_advanced_ILD
+    - ignore_DAH_when_GGO_occurs_with_hemoptysis_anemia_anticoagulation_or_renal_context
+    - ignore_urinalysis_creatinine_ANCA_or_autoimmune_context_when_pulmonary_renal_syndrome_is_possible
+    - treat_GGO_as_specific_for_AE_infection_edema_or_drug_toxicity
+    - treat_rapid_improvement_as_proof_of_a_single_pathway
+
+  platform_must:
+    - keep_edema_PE_infarct_pulmonary_hypertension_and_DAH_visible_in_acute_ILD_worsening
+    - request_cardiac_renal_volume_context_when_GGO_septal_thickening_or_effusions_are_present
+    - request_PE_risk_and_vascular_context_when_decline_is_disproportionate_or_opacity_is_wedge_like
+    - request_hemoptysis_hemoglobin_anticoagulation_urinalysis_and_renal_context_when_DAH_is_possible
+    - preserve_uncertainty_when_prior_CT_cardiac_renal_vascular_or_hemorrhage_data_are_missing
+    - trigger_urgent_review_when_edema_PE_DAH_AE_infection_or_drug_toxicity_overlap_in_unstable_patient
+```
