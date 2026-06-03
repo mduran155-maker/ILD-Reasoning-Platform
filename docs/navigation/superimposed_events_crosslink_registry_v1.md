@@ -510,3 +510,115 @@ updated_OP_safety_boundary:
     - preserve_uncertainty_when_microbiology_oncology_or_medication_context_is_missing
     - trigger_MDD_when_OP_infection_malignancy_drug_toxicity_or_AE_signals_overlap
 ```
+---
+
+## 14. Malignancy on Fibrotic ILD Module Sync
+
+```yaml
+implemented_superimposed_event_modules_update:
+  malignancy_on_fibrotic_ILD_background:
+    path: docs/reasoning/malignancy_on_fibrotic_ILD_background_v1.md
+    role: focal_lesion_and_cancer_on_fibrotic_background_reasoning_map
+    status: implemented
+    linked_reasoning_maps:
+      - superimposed_events_core_blueprint_v1
+      - organizing_pneumonia_on_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+      - acute_exacerbation_vs_infection_vs_edema_v1
+      - fibrotic_ild_triage_map_v1
+    core_safety_question:
+      - Is this truly malignancy, or could infection, OP, infarct, drug toxicity, sarcoid-like reaction, scar, or fibrotic distortion explain the focal abnormality?
+
+updated_completed_superimposed_event_modules:
+  - superimposed_events_core_blueprint_v1
+  - superimposed_infection_on_ILD_background_v1
+  - acute_exacerbation_vs_infection_vs_edema_v1
+  - organizing_pneumonia_on_ILD_background_v1
+  - malignancy_on_fibrotic_ILD_background_v1
+
+remaining_high_priority_superimposed_event_modules:
+  - drug_toxicity_treatment_related_lung_injury_v1
+  - vascular_edema_hemorrhage_mimic_panel_v1
+  - temporal_comparison_methodology_v1
+```
+
+---
+
+## 15. Updated Malignancy on Fibrotic ILD Routing Logic
+
+```yaml
+updated_malignancy_on_fibrotic_ILD_routing_logic:
+  if_user_starts_with_new_or_growing_nodule_on_fibrotic_background:
+    route_to:
+      - malignancy_on_fibrotic_ILD_background_v1
+      - superimposed_events_core_blueprint_v1
+      - superimposed_infection_on_ILD_background_v1
+    required_prompt:
+      - New_or_growing_nodule_should_not_be_hidden_inside_fibrosis_or_scar_label
+
+  if_user_starts_with_persistent_focal_consolidation:
+    route_to:
+      - malignancy_on_fibrotic_ILD_background_v1
+      - organizing_pneumonia_on_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+    required_prompt:
+      - Persistent_focal_consolidation_requires_malignancy_OP_infection_and_temporal_review
+
+  if_user_starts_with_mass_like_fibrotic_distortion:
+    route_to:
+      - malignancy_on_fibrotic_ILD_background_v1
+      - fibrotic_ild_triage_map_v1
+    required_prompt:
+      - Mass_like_fibrotic_distortion_requires_growth_soft_tissue_component_and_prior_CT_review
+
+  if_user_starts_with_new_or_progressive_lymphadenopathy_on_ILD_background:
+    route_to:
+      - malignancy_on_fibrotic_ILD_background_v1
+      - superimposed_events_core_blueprint_v1
+      - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+    required_prompt:
+      - Progressive_or_asymmetric_nodes_require_malignancy_lymphoma_infection_and_sarcoid_like_reaction_review
+
+  if_user_starts_with_known_cancer_and_new_fibrotic_lung_opacity:
+    route_to:
+      - malignancy_on_fibrotic_ILD_background_v1
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - organizing_pneumonia_on_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+    required_prompt:
+      - Cancer_context_requires_progression_treatment_reaction_infection_OP_and_sarcoid_like_reaction_review
+
+  if_user_starts_with_FDG_avid_focus_in_fibrotic_lung:
+    route_to:
+      - malignancy_on_fibrotic_ILD_background_v1
+      - organizing_pneumonia_on_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+    required_prompt:
+      - FDG_uptake_is_not_specific_and_requires_timeline_distribution_and_inflammatory_context
+```
+
+---
+
+## 16. Updated Malignancy on Fibrotic ILD Safety Boundary
+
+```yaml
+updated_malignancy_on_fibrotic_ILD_safety_boundary:
+  platform_must_not:
+    - call_new_or_growing_nodule_scar_without_prior_CT_review
+    - hide_focal_malignancy_inside_baseline_fibrosis
+    - assume_persistent_focal_consolidation_is_infection_or_OP_indefinitely
+    - diagnose_malignancy_from_CT_or_PET_alone
+    - rely_on_FDG_uptake_without_timeline_distribution_and_inflammatory_context
+    - ignore_infection_OP_infarct_drug_toxicity_sarcoid_like_reaction_or_fibrotic_scar_mimics
+    - let_benign_sampling_from_one_site_explain_a_separate_unsampled_growing_lesion
+    - ignore_sampling_risk_in_fibrotic_lung
+
+  platform_must:
+    - route_new_or_growing_focal_abnormality_to_malignancy_on_fibrotic_ILD_review
+    - request_prior_CT_or_follow_up_context_when_newness_growth_or_persistence_matters
+    - keep_infection_OP_and_inflammatory_mimics_visible
+    - keep_oncology_history_and_treatment_timeline_visible
+    - keep_tissue_sampling_target_and_risk_context_visible
+    - preserve_uncertainty_when_prior_CT_PET_CT_or_growth_rate_are_unavailable
+    - trigger_oncology_or_MDD_review_when_malignancy_mimic_or_sampling_signals_overlap
+```
