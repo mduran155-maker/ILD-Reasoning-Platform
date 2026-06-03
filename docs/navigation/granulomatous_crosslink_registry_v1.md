@@ -519,3 +519,92 @@ updated_granulomatous_safety_boundary:
     - preserve_uncertainty_when_immunoglobulin_status_is_unknown
     - trigger_MDD_when_sarcoidosis_GLILD_infection_or_lymphoma_signals_overlap
 ```
+---
+
+## 16. GLILD Pattern Module Sync
+
+```yaml
+implemented_granulomatous_pattern_modules_update:
+  GLILD_pattern:
+    path: docs/patterns/glild_pattern_gold_standard_v1.md
+    role: immune_deficiency_granulomatous_pattern_datasheet
+    status: implemented
+    linked_reasoning_maps:
+      - sarcoidosis_vs_glild_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    linked_evidence:
+      - BLF_UKPIN_2017_GLILD_CONSENSUS_STATEMENT
+      - CVID_ILD_DIAGNOSTIC_TESTING_SYSTEMATIC_REVIEW_2023
+      - GLILD_DIAGNOSIS_MANAGEMENT_REVIEW_2024
+    core_safety_question:
+      - Is there CVID, primary antibody deficiency, recurrent infection, hypogammaglobulinemia, splenomegaly, cytopenia, or lymphoproliferative context?
+
+updated_completed_granulomatous_modules:
+  - granulomatous_ild_reasoning_map_v1
+  - sarcoidosis_pattern_gold_standard_v1
+  - sarcoidosis_pattern_taxonomy_v1
+  - sarcoidosis_vs_granulomatous_infection_gray_zone_v1
+  - sarcoidosis_vs_hypersensitivity_pneumonitis_gray_zone_v1
+  - sarcoidosis_vs_glild_gray_zone_v1
+  - glild_pattern_gold_standard_v1
+```
+
+---
+
+## 17. Updated GLILD Routing Logic
+
+```yaml
+updated_GLILD_routing_logic:
+  if_user_starts_with_known_CVID_and_lung_abnormality:
+    route_to:
+      - glild_pattern_gold_standard_v1
+      - sarcoidosis_vs_glild_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - GLILD_infection_and_lymphoma_review
+
+  if_user_starts_with_recurrent_infections_and_sarcoidosis_like_imaging:
+    route_to:
+      - sarcoidosis_vs_glild_gray_zone_v1
+      - glild_pattern_gold_standard_v1
+    required_prompt:
+      - immunoglobulin_and_primary_antibody_deficiency_review
+
+  if_user_starts_with_hypogammaglobulinemia_and_nodules_GGO_or_consolidation:
+    route_to:
+      - glild_pattern_gold_standard_v1
+      - sarcoidosis_vs_glild_gray_zone_v1
+    required_prompt:
+      - CVID_GLILD_infection_lymphoma_context_review
+
+  if_user_starts_with_granulomas_and_immune_deficiency_context:
+    route_to:
+      - glild_pattern_gold_standard_v1
+      - sarcoidosis_vs_glild_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - granulomas_do_not_equal_sarcoidosis_without_immune_context_review
+```
+
+---
+
+## 18. Updated GLILD Safety Boundary
+
+```yaml
+updated_GLILD_safety_boundary:
+  platform_must_not:
+    - diagnose_GLILD_from_imaging_alone
+    - diagnose_sarcoidosis_without_reviewing_CVID_or_antibody_deficiency_context
+    - ignore_recurrent_sinopulmonary_infections
+    - ignore_hypogammaglobulinemia
+    - ignore_splenomegaly_cytopenias_or_lymphoproliferative_features
+    - ignore_infection_or_lymphoma_malignancy_mimics
+    - hide_limited_GLILD_evidence_base
+
+  platform_must:
+    - route_CVID_or_antibody_deficiency_context_to_GLILD_pattern
+    - keep_sarcoidosis_vs_GLILD_gray_zone_visible
+    - keep_infection_and_lymphoma_review_visible
+    - preserve_uncertainty_when_immunoglobulin_status_is_unknown
+    - trigger_MDD_when_GLILD_sarcoidosis_infection_or_lymphoma_signals_overlap
+```
