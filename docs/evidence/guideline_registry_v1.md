@@ -543,3 +543,143 @@ granulomatous_evidence_safety_rule:
     - preserve_uncertainty
     - trigger_MDD_when_pattern_and_context_conflict
 ```
+---
+
+## 13. GLILD / Immune Deficiency Granulomatous ILD Evidence Update
+
+```yaml
+glild_module_sources:
+  BLF_UKPIN_2017_GLILD_CONSENSUS_STATEMENT:
+    title: BLF/UKPIN Consensus Statement on the Definition, Diagnosis and Management of Granulomatous-Lymphocytic Interstitial Lung Disease in Common Variable Immunodeficiency Disorders
+    organization:
+      - British Lung Foundation
+      - United Kingdom Primary Immunodeficiency Network
+    year: 2017
+    publication:
+      journal: Journal of Allergy and Clinical Immunology: In Practice
+      volume: 5
+      issue: 4
+      pages: 938-945
+    scope:
+      - GLILD definition
+      - GLILD diagnosis framework
+      - GLILD management consensus
+      - CVID-associated granulomatous-lymphocytic ILD
+    platform_use:
+      - sarcoidosis_vs_glild_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+      - granulomatous_crosslink_registry_v1
+      - future_glild_pattern_gold_standard_v1
+    evidence_role: consensus_statement
+    full_text_review_required: true
+    diagnostic_boundary:
+      - supports_GLILD_context_in_CVID
+      - does_not_create_imaging_only_diagnostic_authority
+      - infection_and_lymphoma_review_remain_required
+
+  CVID_ILD_DIAGNOSTIC_TESTING_SYSTEMATIC_REVIEW_2023:
+    title: Diagnostic testing for interstitial lung disease in common variable immunodeficiency: a systematic review
+    year: 2023
+    publication:
+      journal: Frontiers in Immunology
+    scope:
+      - diagnostic tests for CVID-associated ILD
+      - HRCT use
+      - pulmonary function testing
+      - bronchoalveolar lavage
+      - biopsy context
+      - evidence limitations
+    platform_use:
+      - sarcoidosis_vs_glild_gray_zone_v1
+      - future_glild_pattern_gold_standard_v1
+      - source_review_protocol_v1
+    evidence_role: systematic_review
+    full_text_review_required: true
+    diagnostic_boundary:
+      - highlights_lack_of_evidence_based_guidelines
+      - supports_cautious_language
+      - supports_need_for_MDD_and_source_review
+
+  GLILD_DIAGNOSIS_MANAGEMENT_REVIEW_2024:
+    title: Approach to diagnosing and managing granulomatous-lymphocytic interstitial lung disease
+    year: 2024
+    publication:
+      journal: eClinicalMedicine
+    scope:
+      - GLILD diagnostic approach
+      - clinical_radiologic_pathologic_integration
+      - multidisciplinary discussion
+      - management controversies
+      - evidence limitations
+    platform_use:
+      - sarcoidosis_vs_glild_gray_zone_v1
+      - future_glild_pattern_gold_standard_v1
+      - MDD_core_future_module
+    evidence_role: peer_reviewed_review
+    full_text_review_required: true
+    diagnostic_boundary:
+      - supports_practical_reasoning_framework
+      - does_not_replace_consensus_or_expert_review
+      - emphasizes_MDD_and_limited_evidence
+```
+
+---
+
+## 14. GLILD Module-to-Evidence Mapping
+
+```yaml
+glild_module_to_evidence_mapping:
+  sarcoidosis_vs_glild_gray_zone_v1:
+    primary_sources:
+      - BLF_UKPIN_2017_GLILD_CONSENSUS_STATEMENT
+      - ATS_2020_SARCOIDOSIS_DIAGNOSIS_DETECTION
+    secondary_sources:
+      - CVID_ILD_DIAGNOSTIC_TESTING_SYSTEMATIC_REVIEW_2023
+      - GLILD_DIAGNOSIS_MANAGEMENT_REVIEW_2024
+    scope_note:
+      - Sarcoidosis reasoning uses ATS diagnostic framework.
+      - GLILD reasoning uses CVID/immune-deficiency context and BLF/UKPIN consensus.
+      - CVID-ILD diagnostic evidence remains limited and must be labeled cautiously.
+
+  granulomatous_ild_reasoning_map_v1:
+    added_sources:
+      - BLF_UKPIN_2017_GLILD_CONSENSUS_STATEMENT
+      - CVID_ILD_DIAGNOSTIC_TESTING_SYSTEMATIC_REVIEW_2023
+      - GLILD_DIAGNOSIS_MANAGEMENT_REVIEW_2024
+    scope_note:
+      - Immune deficiency context must route to GLILD review.
+      - Infection and lymphoma/malignancy must remain visible in GLILD-like cases.
+
+  future_glild_pattern_gold_standard_v1:
+    required_sources:
+      - BLF_UKPIN_2017_GLILD_CONSENSUS_STATEMENT
+      - CVID_ILD_DIAGNOSTIC_TESTING_SYSTEMATIC_REVIEW_2023
+      - GLILD_DIAGNOSIS_MANAGEMENT_REVIEW_2024
+    required_caution:
+      - evidence_base_less_mature_than_IPF_HP_sarcoidosis_guidelines
+      - public_ready_status_requires_expert_review
+```
+
+---
+
+## 15. GLILD Evidence Safety Rule
+
+```yaml
+glild_evidence_safety_rule:
+  platform_must_not:
+    - diagnose_GLILD_from_imaging_alone
+    - diagnose_sarcoidosis_without_reviewing_CVID_context
+    - ignore_recurrent_infections
+    - ignore_hypogammaglobulinemia
+    - ignore_infection_or_lymphoma_mimics
+    - present_GLILD_review_opinion_as_high_certainty_guideline
+    - hide_limited_evidence_base
+
+  platform_must:
+    - label_BLF_UKPIN_as_consensus_statement
+    - label_2023_CVID_ILD_paper_as_systematic_review
+    - label_2024_GLILD_paper_as_peer_reviewed_review
+    - keep_MDD_and_immunology_review_visible
+    - preserve_uncertainty_when_CVID_or_immunoglobulin_status_is_unknown
+    - require_full_source_review_before_public_release
+```
