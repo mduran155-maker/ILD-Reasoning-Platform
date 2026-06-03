@@ -683,3 +683,191 @@ glild_evidence_safety_rule:
     - preserve_uncertainty_when_CVID_or_immunoglobulin_status_is_unknown
     - require_full_source_review_before_public_release
 ```
+---
+
+## 16. Oncology / Sarcoid-like Reaction Evidence Update
+
+```yaml
+oncology_sarcoid_like_reaction_sources:
+  ATS_2020_SARCOIDOSIS_DIAGNOSIS_DETECTION:
+    title: Diagnosis and Detection of Sarcoidosis
+    organization:
+      - American Thoracic Society
+    year: 2020
+    scope:
+      - sarcoidosis diagnostic framework
+      - compatible clinical presentation
+      - nonnecrotizing granulomatous inflammation
+      - exclusion of alternative granulomatous disease
+    platform_use:
+      - sarcoidosis_pattern_gold_standard_v1
+      - granulomatous_ild_reasoning_map_v1
+      - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+    evidence_role: primary_diagnostic_guideline
+    full_text_review_required: true
+    diagnostic_boundary:
+      - supports_sarcoidosis_reasoning_framework
+      - requires_alternative_causes_to_remain_visible
+      - does_not_allow_imaging_only_diagnosis
+
+  BTS_2021_PULMONARY_SARCOIDOSIS_CLINICAL_STATEMENT:
+    title: BTS Clinical Statement on Pulmonary Sarcoidosis
+    organization:
+      - British Thoracic Society
+    year: 2021
+    scope:
+      - pulmonary sarcoidosis diagnosis context
+      - evaluation
+      - monitoring
+      - management context
+      - clinical practice points
+    platform_use:
+      - sarcoidosis_pattern_gold_standard_v1
+      - granulomatous_ild_reasoning_map_v1
+      - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+    evidence_role: clinical_statement
+    full_text_review_required: true
+    diagnostic_boundary:
+      - supports_pulmonary_sarcoidosis_context
+      - does_not_remove_need_for_malignancy_infection_or_mimic_review
+
+  ICI_RELATED_SARCOID_LIKE_REACTION_PET_CT_REVIEW:
+    title: Immune Checkpoint Inhibitor-related Adverse Effects and FDG PET/CT Findings
+    year: 2021
+    scope:
+      - immune checkpoint inhibitor adverse effects
+      - sarcoid-like reaction imaging
+      - FDG PET/CT interpretation pitfalls
+      - symmetric hypermetabolic hilar/mediastinal lymphadenopathy context
+    platform_use:
+      - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+      - future_oncology_context_module
+      - red_flag_panel_future_module
+    evidence_role: imaging_review
+    full_text_review_required: true
+    diagnostic_boundary:
+      - supports_FDG_PET_CT_pitfall_awareness
+      - does_not_diagnose_sarcoid_like_reaction_without_context
+      - does_not_exclude_malignancy_progression
+
+  FDG_PET_CT_IMMUNOTHERAPY_IRAE_REVIEW_2024:
+    title: FDG PET/CT patterns of immune-related adverse events in immune checkpoint inhibitor therapy
+    year: 2024
+    scope:
+      - immune-related adverse event imaging
+      - PET/CT interpretation in immunotherapy context
+      - therapy-related inflammatory mimics
+    platform_use:
+      - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+      - future_immunotherapy_context_module
+    evidence_role: peer_reviewed_review
+    full_text_review_required: true
+    diagnostic_boundary:
+      - supports_immunotherapy_context_awareness
+      - does_not_replace_oncology_review
+      - does_not_allow_PET_only_classification
+
+  SARCOID_LIKE_REACTION_MALIGNANCY_REVIEW_CANDIDATE:
+    title: Sarcoid-like reaction in malignancy context
+    year: source_review_pending
+    scope:
+      - sarcoid-like reaction associated with malignancy
+      - nodal and pulmonary mimics of progression
+      - pathology and oncology context
+    platform_use:
+      - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+      - future_oncology_mimic_review_module
+    evidence_role: candidate_peer_reviewed_review
+    full_text_review_required: true
+    citation_status: needs_verification
+    diagnostic_boundary:
+      - candidate_source_only
+      - cannot_support_public_ready_claim_until_reviewed
+
+  ICI_ASSOCIATED_SARCOID_LIKE_REACTION_CASE_SERIES_CANDIDATE:
+    title: Immune checkpoint inhibitor-associated sarcoid-like reaction case series / review
+    year: source_review_pending
+    scope:
+      - ICI-associated sarcoid-like reaction
+      - progression mimic
+      - tissue confirmation context
+      - oncologic response discordance
+    platform_use:
+      - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+      - future_case_simulation_module
+    evidence_role: candidate_case_series_or_review
+    full_text_review_required: true
+    citation_status: needs_verification
+    diagnostic_boundary:
+      - supports_gray_zone_awareness_only_after_review
+      - does_not_support_generalized_diagnostic_rule
+```
+
+---
+
+## 17. Oncology / Sarcoid-like Reaction Module-to-Evidence Mapping
+
+```yaml
+oncology_sarcoid_like_reaction_module_to_evidence_mapping:
+  sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1:
+    primary_sources:
+      - ATS_2020_SARCOIDOSIS_DIAGNOSIS_DETECTION
+      - BTS_2021_PULMONARY_SARCOIDOSIS_CLINICAL_STATEMENT
+    supportive_sources:
+      - ICI_RELATED_SARCOID_LIKE_REACTION_PET_CT_REVIEW
+      - FDG_PET_CT_IMMUNOTHERAPY_IRAE_REVIEW_2024
+    candidate_sources_pending_review:
+      - SARCOID_LIKE_REACTION_MALIGNANCY_REVIEW_CANDIDATE
+      - ICI_ASSOCIATED_SARCOID_LIKE_REACTION_CASE_SERIES_CANDIDATE
+    scope_note:
+      - ATS_2020_supports_sarcoidosis_diagnostic_framework_and_exclusion_of_alternatives.
+      - BTS_2021_supports_pulmonary_sarcoidosis_clinical_context.
+      - PET_CT_and_ICI_sources_support_pitfall_awareness_not_diagnostic_authority.
+      - Oncology_context_requires_oncology_MDD_or_specialist_review_when_progression_vs_reaction_is_uncertain.
+
+  granulomatous_ild_reasoning_map_v1:
+    added_sources:
+      - ICI_RELATED_SARCOID_LIKE_REACTION_PET_CT_REVIEW
+      - FDG_PET_CT_IMMUNOTHERAPY_IRAE_REVIEW_2024
+    scope_note:
+      - Known_malignancy_or_immunotherapy_context_must_keep_malignancy_progression_and_sarcoid_like_reaction_visible.
+      - FDG_avid_lymphadenopathy_should_not_be_classified_without_distribution_timeline_and_context.
+
+  future_oncology_context_module:
+    required_sources:
+      - oncology_guideline_or_review_source_pending
+      - immune_checkpoint_inhibitor_irAE_imaging_review
+      - sarcoid_like_reaction_case_series_or_review
+    required_caution:
+      - public_ready_status_requires_oncology_review
+      - PET_CT_findings_are_not_specific
+      - tissue_sampling_target_and_prior_imaging_matter
+```
+
+---
+
+## 18. Oncology / Sarcoid-like Reaction Evidence Safety Rule
+
+```yaml
+oncology_sarcoid_like_reaction_evidence_safety_rule:
+  platform_must_not:
+    - diagnose_sarcoidosis_from_FDG_avid_nodes
+    - diagnose_malignancy_progression_from_FDG_avid_nodes_alone
+    - diagnose_sarcoid_like_reaction_without_oncology_timeline_context
+    - ignore_known_or_prior_malignancy
+    - ignore_immune_checkpoint_inhibitor_or_antineoplastic_treatment_context
+    - ignore_asymmetric_progressive_or_necrotic_lymphadenopathy
+    - ignore_new_or_growing_nodule_or_mass
+    - use_case_reports_as_high_certainty_general_rules
+    - hide_source_review_pending_status
+
+  platform_must:
+    - label_ATS_as_sarcoidosis_diagnostic_framework_source
+    - label_BTS_as_pulmonary_sarcoidosis_clinical_statement
+    - label_PET_CT_and_ICI_sources_as_supportive_pitfall_awareness_sources
+    - keep_malignancy_progression_visible
+    - keep_sarcoid_like_reaction_visible_when_treatment_context_fits
+    - preserve_uncertainty_when_prior_CT_or_PET_CT_is_unavailable
+    - trigger_oncology_MDD_when_progression_vs_sarcoid_like_reaction_is_uncertain
+    - require_full_source_review_before_public_release
+```
