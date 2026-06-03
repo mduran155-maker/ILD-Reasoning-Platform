@@ -407,3 +407,106 @@ Ask:
 7. Is urgent review or MDD needed?
 8. What do we still not know?
 ```
+---
+
+## 11. Organizing Pneumonia Module Sync
+
+```yaml
+implemented_superimposed_event_modules_update:
+  organizing_pneumonia_on_ILD_background:
+    path: docs/reasoning/organizing_pneumonia_on_ILD_background_v1.md
+    role: reversible_inflammatory_opacity_and_mimic_reasoning_map
+    status: implemented
+    linked_reasoning_maps:
+      - superimposed_events_core_blueprint_v1
+      - superimposed_infection_on_ILD_background_v1
+      - acute_exacerbation_vs_infection_vs_edema_v1
+      - fibrotic_ild_triage_map_v1
+    core_safety_question:
+      - Is this truly OP-like inflammation, or could infection, malignancy, drug toxicity, aspiration, radiation injury, edema, PE, hemorrhage, acute exacerbation, or baseline ILD progression explain the opacity?
+
+updated_completed_superimposed_event_modules:
+  - superimposed_events_core_blueprint_v1
+  - superimposed_infection_on_ILD_background_v1
+  - acute_exacerbation_vs_infection_vs_edema_v1
+  - organizing_pneumonia_on_ILD_background_v1
+
+remaining_high_priority_superimposed_event_modules:
+  - malignancy_on_fibrotic_ILD_background_v1
+  - drug_toxicity_treatment_related_lung_injury_v1
+  - vascular_edema_hemorrhage_mimic_panel_v1
+  - temporal_comparison_methodology_v1
+```
+
+---
+
+## 12. Updated OP Routing Logic
+
+```yaml
+updated_OP_routing_logic:
+  if_user_starts_with_new_peripheral_or_peribronchovascular_consolidation:
+    route_to:
+      - organizing_pneumonia_on_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+      - malignancy_on_fibrotic_ILD_background_v1
+    required_prompt:
+      - OP_like_consolidation_requires_infection_malignancy_drug_aspiration_and_temporal_review
+
+  if_user_starts_with_migratory_or_waxing_waning_consolidation:
+    route_to:
+      - organizing_pneumonia_on_ILD_background_v1
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - superimposed_events_core_blueprint_v1
+    required_prompt:
+      - Migratory_opacity_supports_OP_like_behavior_but_does_not_exclude_infection_drug_toxicity_or_aspiration
+
+  if_user_starts_with_reverse_halo_or_atoll_like_pattern:
+    route_to:
+      - organizing_pneumonia_on_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+      - vascular_edema_hemorrhage_mimic_panel_v1
+    required_prompt:
+      - Reverse_halo_is_not_specific_for_OP_and_requires_infection_infarct_vasculitis_malignancy_review
+
+  if_user_starts_with_persistent_focal_OP_like_consolidation:
+    route_to:
+      - organizing_pneumonia_on_ILD_background_v1
+      - malignancy_on_fibrotic_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+    required_prompt:
+      - Persistent_focal_OP_like_opacity_should_not_hide_malignancy_or_chronic_infection
+
+  if_user_starts_with_OP_like_opacity_after_drug_or_cancer_therapy:
+    route_to:
+      - organizing_pneumonia_on_ILD_background_v1
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - malignancy_on_fibrotic_ILD_background_v1
+    required_prompt:
+      - Treatment_timeline_is_high_yield_and_progression_toxicity_infection_OP_must_remain_visible
+```
+
+---
+
+## 13. Updated OP Safety Boundary
+
+```yaml
+updated_OP_safety_boundary:
+  platform_must_not:
+    - diagnose_OP_from_morphology_alone
+    - call_every_peripheral_consolidation_OP
+    - call_every_migratory_opacity_benign_inflammatory_OP
+    - ignore_infection_in_OP_like_opacity
+    - ignore_malignancy_in_persistent_focal_OP_like_consolidation
+    - ignore_drug_toxicity_or_cancer_treatment_timeline
+    - ignore_aspiration_radiation_PE_hemorrhage_or_edema_mimics
+    - treat_improvement_as_proof_of_OP
+    - call_OP_like_opacity_simple_ILD_progression_without_prior_CT_review
+
+  platform_must:
+    - route_OP_like_opacity_to_infection_malignancy_drug_aspiration_and_temporal_review
+    - request_prior_CT_or_follow_up_context_when_persistence_or_migration_matters
+    - keep_treatment_timeline_visible
+    - keep_sampling_or_follow_up_discussion_visible_when_focal_persistent_or_mass_like
+    - preserve_uncertainty_when_microbiology_oncology_or_medication_context_is_missing
+    - trigger_MDD_when_OP_infection_malignancy_drug_toxicity_or_AE_signals_overlap
+```
