@@ -898,3 +898,108 @@ updated_fibrotic_sarcoidosis_safety_boundary:
     - preserve_uncertainty_when_prior_sarcoidosis_context_is_unknown
     - trigger_MDD_when_fibrotic_sarcoidosis_HP_pneumoconiosis_infection_or_malignancy_signals_overlap
 ```
+---
+
+## 28. GPA / Granulomatous Vasculitis Module Sync
+
+```yaml
+implemented_granulomatous_gray_zone_modules_update:
+  sarcoidosis_vs_GPA_or_granulomatous_vasculitis:
+    path: docs/reasoning/sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1.md
+    role: vasculitis_granulomatous_red_flag_gray_zone
+    status: implemented
+    linked_pattern:
+      - sarcoidosis_pattern_gold_standard_v1
+    linked_reasoning_map:
+      - granulomatous_ild_reasoning_map_v1
+    core_safety_question:
+      - Are cavitating nodules, destructive sinonasal disease, subglottic/tracheobronchial stenosis, hemoptysis, renal findings, or ANCA/AAV context present before calling this sarcoidosis?
+
+updated_completed_granulomatous_modules:
+  - granulomatous_ild_reasoning_map_v1
+  - sarcoidosis_pattern_gold_standard_v1
+  - sarcoidosis_pattern_taxonomy_v1
+  - sarcoidosis_vs_granulomatous_infection_gray_zone_v1
+  - sarcoidosis_vs_hypersensitivity_pneumonitis_gray_zone_v1
+  - sarcoidosis_vs_glild_gray_zone_v1
+  - glild_pattern_gold_standard_v1
+  - sarcoidosis_vs_berylliosis_or_pneumoconiosis_gray_zone_v1
+  - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+  - fibrotic_sarcoidosis_vs_chronic_hp_gray_zone_v1
+  - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+
+remaining_high_priority_granulomatous_gray_zones:
+  - none_for_v0_2_core
+```
+
+---
+
+## 29. Updated GPA / Vasculitis Routing Logic
+
+```yaml
+updated_GPA_vasculitis_routing_logic:
+  if_user_starts_with_sarcoidosis_like_pattern_and_cavitating_nodules:
+    route_to:
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - GPA_infection_malignancy_septic_emboli_and_rheumatoid_nodule_review
+
+  if_user_starts_with_sarcoidosis_like_pattern_and_destructive_sinonasal_disease:
+    route_to:
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - ENT_and_AAV_context_review
+
+  if_user_starts_with_airway_stenosis_or_tracheobronchial_disease:
+    route_to:
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - airway_sarcoidosis_vs_GPA_airway_disease_review
+
+  if_user_starts_with_pulmonary_nodules_and_renal_findings:
+    route_to:
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - pulmonary_renal_vasculitis_review
+
+  if_user_starts_with_acute_GGO_hemoptysis_or_DAH_context:
+    route_to:
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - diffuse_alveolar_hemorrhage_infection_and_vasculitis_review
+
+  if_user_starts_with_granulomas_and_ANCA_or_vasculitis_context:
+    route_to:
+      - sarcoidosis_vs_GPA_or_granulomatous_vasculitis_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - granulomas_do_not_equal_sarcoidosis_without_vasculitis_review
+```
+
+---
+
+## 30. Updated GPA / Vasculitis Safety Boundary
+
+```yaml
+updated_GPA_vasculitis_safety_boundary:
+  platform_must_not:
+    - call_cavitating_nodules_atypical_sarcoidosis_without_GPA_infection_malignancy_review
+    - ignore_destructive_sinonasal_disease
+    - ignore_subglottic_or_tracheobronchial_stenosis
+    - ignore_hemoptysis_or_diffuse_alveolar_hemorrhage_context
+    - ignore_urinalysis_creatinine_or_glomerulonephritis_context
+    - use_ANCA_as_standalone_diagnostic_authority
+    - let_granulomas_override_vasculitis_infection_or_malignancy_context
+
+  platform_must:
+    - route_cavitary_or_destructive_airway_patterns_to_GPA_vasculitis_review
+    - keep_infection_malignancy_septic_emboli_and_rheumatoid_nodules_visible
+    - require_renal_ENT_airway_ANCA_and_pathology_context_when_relevant
+    - preserve_uncertainty_when_urinalysis_ANCA_or_prior_CT_are_unavailable
+    - trigger_rheumatology_nephrology_ENT_microbiology_or_MDD_review_when_signals_overlap
+```
