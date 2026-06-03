@@ -698,3 +698,100 @@ updated_occupational_safety_boundary:
     - preserve_uncertainty_when_work_history_is_incomplete
     - trigger_occupational_medicine_or_MDD_review_when_exposure_context_is_plausible
 ```
+---
+
+## 22. Malignancy / Sarcoid-like Reaction Module Sync
+
+```yaml
+implemented_granulomatous_gray_zone_modules_update:
+  sarcoidosis_vs_malignancy_or_sarcoid_like_reaction:
+    path: docs/reasoning/sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1.md
+    role: oncology_sarcoid_like_reaction_gray_zone
+    status: implemented
+    linked_pattern:
+      - sarcoidosis_pattern_gold_standard_v1
+    linked_reasoning_map:
+      - granulomatous_ild_reasoning_map_v1
+    core_safety_question:
+      - Is there known malignancy, immune checkpoint inhibitor exposure, asymmetric progression, FDG-avid disease, or a new mass/nodule before calling this sarcoidosis?
+
+updated_completed_granulomatous_modules:
+  - granulomatous_ild_reasoning_map_v1
+  - sarcoidosis_pattern_gold_standard_v1
+  - sarcoidosis_pattern_taxonomy_v1
+  - sarcoidosis_vs_granulomatous_infection_gray_zone_v1
+  - sarcoidosis_vs_hypersensitivity_pneumonitis_gray_zone_v1
+  - sarcoidosis_vs_glild_gray_zone_v1
+  - glild_pattern_gold_standard_v1
+  - sarcoidosis_vs_berylliosis_or_pneumoconiosis_gray_zone_v1
+  - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+
+remaining_high_priority_granulomatous_gray_zones:
+  - fibrotic_sarcoidosis_vs_chronic_HP
+  - sarcoidosis_vs_GPA_or_granulomatous_vasculitis
+```
+
+---
+
+## 23. Updated Oncology / Sarcoid-like Reaction Routing Logic
+
+```yaml
+updated_oncology_sarcoid_like_reaction_routing_logic:
+  if_user_starts_with_sarcoidosis_like_pattern_and_known_malignancy:
+    route_to:
+      - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - malignancy_progression_vs_sarcoid_like_reaction_review
+
+  if_user_starts_with_FDG_avid_hilar_or_mediastinal_nodes:
+    route_to:
+      - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - FDG_uptake_is_not_specific_distribution_timeline_and_tissue_context_required
+
+  if_user_starts_with_immune_checkpoint_inhibitor_context_and_new_nodes:
+    route_to:
+      - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - ICI_related_sarcoid_like_reaction_vs_progression_review
+
+  if_user_starts_with_new_or_growing_nodule_or_mass_in_known_sarcoidosis:
+    route_to:
+      - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - new_focal_lesion_should_not_be_hidden_inside_sarcoidosis_label
+
+  if_user_starts_with_asymmetric_or_progressive_lymphadenopathy:
+    route_to:
+      - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - lymphoma_malignancy_infection_and_sarcoid_like_reaction_review
+```
+
+---
+
+## 24. Updated Oncology Safety Boundary
+
+```yaml
+updated_oncology_safety_boundary:
+  platform_must_not:
+    - diagnose_sarcoidosis_without_reviewing_known_or_prior_malignancy
+    - treat_FDG_avid_nodes_as_specific_for_malignancy_or_sarcoidosis
+    - ignore_immune_checkpoint_inhibitor_or_antineoplastic_treatment_context
+    - ignore_new_or_growing_nodule_or_mass
+    - ignore_asymmetric_progressive_or_necrotic_lymphadenopathy
+    - call_sarcoid_like_reaction_without_oncology_timeline_and_progression_review
+    - let_granulomatous_tissue_from_one_site_explain_a_separate_unsampled_growing_lesion
+
+  platform_must:
+    - route_cancer_context_to_oncology_gray_zone_review
+    - keep_malignancy_progression_visible
+    - keep_sarcoid_like_reaction_visible_when_treatment_context_fits
+    - preserve_uncertainty_when_prior_CT_or_PET_CT_is_unavailable
+    - trigger_oncology_MDD_when_progression_vs_sarcoid_like_reaction_is_uncertain
+```
