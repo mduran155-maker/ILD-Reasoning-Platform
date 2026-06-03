@@ -622,3 +622,115 @@ updated_malignancy_on_fibrotic_ILD_safety_boundary:
     - preserve_uncertainty_when_prior_CT_PET_CT_or_growth_rate_are_unavailable
     - trigger_oncology_or_MDD_review_when_malignancy_mimic_or_sampling_signals_overlap
 ```
+---
+
+## 17. Drug Toxicity / Treatment-related Lung Injury Module Sync
+
+```yaml
+implemented_superimposed_event_modules_update:
+  drug_toxicity_treatment_related_lung_injury:
+    path: docs/reasoning/drug_toxicity_treatment_related_lung_injury_v1.md
+    role: medication_treatment_timeline_and_pneumonitis_mimic_reasoning_map
+    status: implemented
+    linked_reasoning_maps:
+      - superimposed_events_core_blueprint_v1
+      - organizing_pneumonia_on_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+      - acute_exacerbation_vs_infection_vs_edema_v1
+      - malignancy_on_fibrotic_ILD_background_v1
+    core_safety_question:
+      - Is this truly drug toxicity or treatment-related lung injury, or could infection, malignancy progression, OP, edema, hemorrhage, PE, CTD flare, aspiration, acute exacerbation, or baseline ILD progression explain the change?
+
+updated_completed_superimposed_event_modules:
+  - superimposed_events_core_blueprint_v1
+  - superimposed_infection_on_ILD_background_v1
+  - acute_exacerbation_vs_infection_vs_edema_v1
+  - organizing_pneumonia_on_ILD_background_v1
+  - malignancy_on_fibrotic_ILD_background_v1
+  - drug_toxicity_treatment_related_lung_injury_v1
+
+remaining_high_priority_superimposed_event_modules:
+  - vascular_edema_hemorrhage_mimic_panel_v1
+  - temporal_comparison_methodology_v1
+```
+
+---
+
+## 18. Updated Drug / Treatment-related Lung Injury Routing Logic
+
+```yaml
+updated_drug_toxicity_treatment_related_lung_injury_routing_logic:
+  if_user_starts_with_new_opacity_after_new_medication_or_dose_change:
+    route_to:
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - superimposed_infection_on_ILD_background_v1
+      - acute_exacerbation_vs_infection_vs_edema_v1
+    required_prompt:
+      - Medication_timeline_supports_suspicion_but_does_not_prove_drug_toxicity
+
+  if_user_starts_with_new_lung_opacity_during_immune_checkpoint_inhibitor_therapy:
+    route_to:
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - malignancy_on_fibrotic_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+    required_prompt:
+      - ICI_context_requires_pneumonitis_progression_infection_sarcoid_like_reaction_and_radiation_recall_review
+
+  if_user_starts_with_OP_like_pattern_after_drug_or_cancer_therapy:
+    route_to:
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - organizing_pneumonia_on_ILD_background_v1
+      - malignancy_on_fibrotic_ILD_background_v1
+    required_prompt:
+      - OP_like_pattern_after_treatment_requires_toxicity_progression_infection_and_secondary_OP_review
+
+  if_user_starts_with_DAD_or_ARDS_like_pattern_after_treatment:
+    route_to:
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - acute_exacerbation_vs_infection_vs_edema_v1
+      - vascular_edema_hemorrhage_mimic_panel_v1
+    required_prompt:
+      - DAD_like_treatment_injury_and_acute_exacerbation_can_overlap_and_require_timeline_exclusion_context
+
+  if_user_starts_with_radiation_field_opacity_or_radiation_recall_context:
+    route_to:
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - malignancy_on_fibrotic_ILD_background_v1
+      - organizing_pneumonia_on_ILD_background_v1
+    required_prompt:
+      - Radiation_field_timing_recall_trigger_recurrence_infection_and_OP_review_required
+
+  if_user_starts_with_CTD_ILD_and_new_opacity_after_DMARD_or_biologic:
+    route_to:
+      - drug_toxicity_treatment_related_lung_injury_v1
+      - organizing_pneumonia_on_ILD_background_v1
+      - superimposed_infection_on_ILD_background_v1
+    required_prompt:
+      - CTD_flare_DMARD_toxicity_secondary_OP_and_infection_must_remain_visible
+```
+
+---
+
+## 19. Updated Drug / Treatment-related Lung Injury Safety Boundary
+
+```yaml
+updated_drug_toxicity_treatment_related_lung_injury_safety_boundary:
+  platform_must_not:
+    - diagnose_drug_toxicity_from_timing_alone
+    - call_every_new_GGO_after_medication_drug_toxicity
+    - call_every_ICI_lung_opacity_immune_checkpoint_inhibitor_pneumonitis
+    - ignore_infection_in_treated_or_immunosuppressed_patients
+    - ignore_malignancy_progression_during_cancer_therapy
+    - ignore_radiation_field_radiation_recall_or_recurrence_context
+    - ignore_CTD_flare_secondary_OP_or_baseline_ILD_progression
+    - call_diffuse_GGO_acute_exacerbation_without_medication_treatment_timeline_review
+    - treat_improvement_as_proof_of_drug_toxicity
+
+  platform_must:
+    - request_exact_medication_treatment_radiation_and_dose_timeline
+    - keep_infection_visible_when_immunosuppression_or_cancer_therapy_exists
+    - keep_progression_visible_when_oncology_context_exists
+    - keep_AE_edema_hemorrhage_PE_OP_and_aspiration_mimics_visible
+    - preserve_uncertainty_when_prior_CT_treatment_dates_or_microbiology_are_unavailable
+    - trigger_oncology_rheumatology_infectious_disease_or_MDD_review_when_signals_overlap
+```
