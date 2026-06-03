@@ -374,3 +374,61 @@ Ask:
 6. Is tissue needed, available, or misleading without context?
 7. What do we still not know?
 ```
+---
+
+## 11. Implemented Granulomatous Gray-Zone Modules
+
+```yaml
+implemented_granulomatous_gray_zone_modules:
+  sarcoidosis_vs_granulomatous_infection:
+    path: docs/reasoning/sarcoidosis_vs_granulomatous_infection_gray_zone_v1.md
+    role: infection_safety_gray_zone
+    status: implemented
+    linked_pattern:
+      - sarcoidosis_pattern_gold_standard_v1
+    core_safety_question:
+      - Has granulomatous infection been considered before increasing sarcoidosis confidence?
+
+  sarcoidosis_vs_hypersensitivity_pneumonitis:
+    path: docs/reasoning/sarcoidosis_vs_hypersensitivity_pneumonitis_gray_zone_v1.md
+    role: granulomatous_airway_exposure_gray_zone
+    status: implemented
+    linked_patterns:
+      - sarcoidosis_pattern_gold_standard_v1
+      - fibrotic_hp_pattern_gold_standard_v1
+    core_safety_question:
+      - Are the nodules perilymphatic or centrilobular, and is there air trapping or exposure evidence?
+
+pending_granulomatous_gray_zone_modules:
+  - sarcoidosis_vs_GLILD
+  - sarcoidosis_vs_berylliosis_or_pneumoconiosis
+  - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction
+  - fibrotic_sarcoidosis_vs_chronic_HP
+  - sarcoidosis_vs_GPA_or_granulomatous_vasculitis
+```
+
+---
+
+## 12. Granulomatous Module Next-Step Priority
+
+```yaml
+granulomatous_next_step_priority:
+  completed:
+    - granulomatous_ild_reasoning_map_v1
+    - sarcoidosis_pattern_gold_standard_v1
+    - sarcoidosis_pattern_taxonomy_v1
+    - sarcoidosis_vs_granulomatous_infection_gray_zone_v1
+    - sarcoidosis_vs_hypersensitivity_pneumonitis_gray_zone_v1
+
+  next_recommended:
+    module: sarcoidosis_vs_GLILD
+    reason:
+      - GLILD is a high-value sarcoidosis mimic in immune deficiency context.
+      - It protects the platform from calling immune-deficiency granulomatous disease simple sarcoidosis.
+      - It expands the granulomatous module beyond infection and HP into immune-system context.
+
+  later:
+    - sarcoidosis_vs_berylliosis_or_pneumoconiosis
+    - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction
+    - fibrotic_sarcoidosis_vs_chronic_HP
+```
