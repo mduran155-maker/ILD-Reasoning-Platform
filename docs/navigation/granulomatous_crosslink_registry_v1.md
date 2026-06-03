@@ -795,3 +795,106 @@ updated_oncology_safety_boundary:
     - preserve_uncertainty_when_prior_CT_or_PET_CT_is_unavailable
     - trigger_oncology_MDD_when_progression_vs_sarcoid_like_reaction_is_uncertain
 ```
+---
+
+## 25. Fibrotic Sarcoidosis vs Chronic HP Module Sync
+
+```yaml
+implemented_granulomatous_gray_zone_modules_update:
+  fibrotic_sarcoidosis_vs_chronic_HP:
+    path: docs/reasoning/fibrotic_sarcoidosis_vs_chronic_hp_gray_zone_v1.md
+    role: advanced_fibrotic_granulomatous_HP_overlap_gray_zone
+    status: implemented
+    linked_patterns:
+      - sarcoidosis_pattern_gold_standard_v1
+      - fibrotic_hp_pattern_gold_standard_v1
+    linked_reasoning_maps:
+      - granulomatous_ild_reasoning_map_v1
+      - sarcoidosis_vs_hypersensitivity_pneumonitis_gray_zone_v1
+      - fibrotic_ild_triage_map_v1
+    core_safety_question:
+      - Is upper/perihilar fibrosis truly fibrotic sarcoidosis, or could chronic/fibrotic HP, pneumoconiosis, infection, cavitary complication, or malignancy explain the pattern?
+
+updated_completed_granulomatous_modules:
+  - granulomatous_ild_reasoning_map_v1
+  - sarcoidosis_pattern_gold_standard_v1
+  - sarcoidosis_pattern_taxonomy_v1
+  - sarcoidosis_vs_granulomatous_infection_gray_zone_v1
+  - sarcoidosis_vs_hypersensitivity_pneumonitis_gray_zone_v1
+  - sarcoidosis_vs_glild_gray_zone_v1
+  - glild_pattern_gold_standard_v1
+  - sarcoidosis_vs_berylliosis_or_pneumoconiosis_gray_zone_v1
+  - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction_gray_zone_v1
+  - fibrotic_sarcoidosis_vs_chronic_hp_gray_zone_v1
+
+remaining_high_priority_granulomatous_gray_zones:
+  - sarcoidosis_vs_GPA_or_granulomatous_vasculitis
+```
+
+---
+
+## 26. Updated Fibrotic Sarcoidosis / Chronic HP Routing Logic
+
+```yaml
+updated_fibrotic_sarcoidosis_chronic_HP_routing_logic:
+  if_user_starts_with_upper_lung_or_perihilar_fibrosis:
+    route_to:
+      - fibrotic_sarcoidosis_vs_chronic_hp_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - prior_sarcoidosis_context_prior_CT_exposure_and_occupational_review
+
+  if_user_starts_with_known_sarcoidosis_and_progressive_fibrosis:
+    route_to:
+      - fibrotic_sarcoidosis_vs_chronic_hp_gray_zone_v1
+      - sarcoidosis_pattern_gold_standard_v1
+    required_prompt:
+      - known_sarcoidosis_does_not_prove_all_future_fibrosis_is_sarcoidosis
+
+  if_user_starts_with_fibrotic_sarcoidosis_like_pattern_and_air_trapping:
+    route_to:
+      - fibrotic_sarcoidosis_vs_chronic_hp_gray_zone_v1
+      - sarcoidosis_vs_hypersensitivity_pneumonitis_gray_zone_v1
+      - fibrotic_hp_pattern_gold_standard_v1
+    required_prompt:
+      - extensive_air_trapping_or_three_density_pattern_should_trigger_HP_review
+
+  if_user_starts_with_fibrocystic_or_cavitary_sarcoidosis_like_change:
+    route_to:
+      - fibrotic_sarcoidosis_vs_chronic_hp_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - infection_aspergilloma_malignancy_and_cavitary_complication_review
+
+  if_user_starts_with_upper_lung_fibrosis_and_occupational_exposure:
+    route_to:
+      - fibrotic_sarcoidosis_vs_chronic_hp_gray_zone_v1
+      - sarcoidosis_vs_berylliosis_or_pneumoconiosis_gray_zone_v1
+    required_prompt:
+      - pneumoconiosis_and_occupational_mimic_review
+```
+
+---
+
+## 27. Updated Fibrotic Sarcoidosis Safety Boundary
+
+```yaml
+updated_fibrotic_sarcoidosis_safety_boundary:
+  platform_must_not:
+    - call_upper_lung_fibrosis_fibrotic_sarcoidosis_without_prior_context_review
+    - ignore_air_trapping_mosaic_attenuation_or_three_density_pattern
+    - ignore_exposure_history_when_HP_remains_possible
+    - ignore_occupational_dust_or_pneumoconiosis_context
+    - assume_known_sarcoidosis_explains_all_new_fibrosis
+    - ignore_cavitary_fibrocystic_complications
+    - hide_aspergilloma_infection_malignancy_or_pulmonary_hypertension_concerns
+
+  platform_must:
+    - route_upper_perihilar_fibrosis_to_fibrotic_sarcoidosis_vs_chronic_HP_review
+    - require_prior_CT_or_temporal_context_when_available
+    - keep_HP_visible_when_air_trapping_or_three_density_pattern_is_present
+    - keep_pneumoconiosis_visible_when_occupational_context_exists
+    - keep_complication_review_visible_when_cavitary_or_fibrocystic_change_exists
+    - preserve_uncertainty_when_prior_sarcoidosis_context_is_unknown
+    - trigger_MDD_when_fibrotic_sarcoidosis_HP_pneumoconiosis_infection_or_malignancy_signals_overlap
+```
