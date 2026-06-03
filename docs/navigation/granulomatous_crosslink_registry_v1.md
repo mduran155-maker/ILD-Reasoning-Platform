@@ -608,3 +608,93 @@ updated_GLILD_safety_boundary:
     - preserve_uncertainty_when_immunoglobulin_status_is_unknown
     - trigger_MDD_when_GLILD_sarcoidosis_infection_or_lymphoma_signals_overlap
 ```
+---
+
+## 19. Occupational Granulomatous Mimic Module Sync
+
+```yaml
+implemented_granulomatous_gray_zone_modules_update:
+  sarcoidosis_vs_berylliosis_or_pneumoconiosis:
+    path: docs/reasoning/sarcoidosis_vs_berylliosis_or_pneumoconiosis_gray_zone_v1.md
+    role: occupational_granulomatous_mimic_gray_zone
+    status: implemented
+    linked_pattern:
+      - sarcoidosis_pattern_gold_standard_v1
+    linked_reasoning_map:
+      - granulomatous_ild_reasoning_map_v1
+    core_safety_question:
+      - Has a high-quality occupational exposure history been taken before calling this sarcoidosis?
+
+updated_completed_granulomatous_modules:
+  - granulomatous_ild_reasoning_map_v1
+  - sarcoidosis_pattern_gold_standard_v1
+  - sarcoidosis_pattern_taxonomy_v1
+  - sarcoidosis_vs_granulomatous_infection_gray_zone_v1
+  - sarcoidosis_vs_hypersensitivity_pneumonitis_gray_zone_v1
+  - sarcoidosis_vs_glild_gray_zone_v1
+  - glild_pattern_gold_standard_v1
+  - sarcoidosis_vs_berylliosis_or_pneumoconiosis_gray_zone_v1
+
+remaining_high_priority_granulomatous_gray_zones:
+  - sarcoidosis_vs_malignancy_or_sarcoid_like_reaction
+  - fibrotic_sarcoidosis_vs_chronic_HP
+  - sarcoidosis_vs_GPA_or_granulomatous_vasculitis
+```
+
+---
+
+## 20. Updated Occupational Mimic Routing Logic
+
+```yaml
+updated_occupational_mimic_routing_logic:
+  if_user_starts_with_sarcoidosis_like_pattern_and_beryllium_exposure:
+    route_to:
+      - sarcoidosis_vs_berylliosis_or_pneumoconiosis_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - beryllium_exposure_and_BeLPT_context_review
+
+  if_user_starts_with_sarcoidosis_like_pattern_and_silica_or_dust_exposure:
+    route_to:
+      - sarcoidosis_vs_berylliosis_or_pneumoconiosis_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - pneumoconiosis_and_occupational_medicine_review
+
+  if_user_starts_with_upper_lung_nodules_and_occupational_history:
+    route_to:
+      - sarcoidosis_vs_berylliosis_or_pneumoconiosis_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - dust_related_nodular_lung_disease_review
+
+  if_user_starts_with_granulomas_and_incomplete_work_history:
+    route_to:
+      - sarcoidosis_vs_berylliosis_or_pneumoconiosis_gray_zone_v1
+      - granulomatous_ild_reasoning_map_v1
+    required_prompt:
+      - granulomas_do_not_equal_sarcoidosis_without_occupational_review
+```
+
+---
+
+## 21. Updated Occupational Safety Boundary
+
+```yaml
+updated_occupational_safety_boundary:
+  platform_must_not:
+    - diagnose_sarcoidosis_without_reviewing_occupational_exposure
+    - treat_unknown_exposure_as_negative_exposure
+    - ignore_beryllium_exposure_or_BeLPT_context
+    - ignore_silica_coal_metal_construction_mining_quarry_sandblasting_stone_or_mixed_dust_exposure
+    - ignore_calcified_or_eggshell_nodes
+    - ignore_progressive_massive_fibrosis_pattern
+    - let_granulomas_override_exposure_context
+
+  platform_must:
+    - route_sarcoidosis_like_pattern_with_occupational_exposure_to_occupational_mimic_review
+    - distinguish_unknown_incomplete_and_high_quality_negative_exposure_history
+    - keep_berylliosis_and_pneumoconiosis_visible
+    - preserve_uncertainty_when_work_history_is_incomplete
+    - trigger_occupational_medicine_or_MDD_review_when_exposure_context_is_plausible
+```
