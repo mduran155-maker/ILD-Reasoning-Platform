@@ -82,7 +82,7 @@ They may be used only as anchors for reasoning parity, not as autonomous diagnos
 |---|---|---|---|---|
 | UIP_SRC_2022_ATS_ERS_JRS_ALAT_IPF_PPF | Official clinical practice guideline update | ATS/ERS/JRS/ALAT 2022 IPF Update and Progressive Pulmonary Fibrosis Guideline | Current guideline-sensitive framing, updated IPF/PPF context, source hierarchy | primary_anchor |
 | UIP_SRC_2018_ATS_ERS_JRS_ALAT_DX | Official clinical practice guideline | ATS/ERS/JRS/ALAT 2018 Diagnosis of Idiopathic Pulmonary Fibrosis Guideline | HRCT pattern category framework, diagnostic reasoning boundaries, MDD framing | primary_anchor |
-| UIP_SRC_2018_FLEISCHNER_WHITE_PAPER | Society white paper / expert consensus | Fleischner Society 2018 Diagnostic Criteria for IPF White Paper | HRCT diagnostic criteria comparison, clinical probability framing, multidisciplinary diagnosis context | comparative_anchor |
+| UIP_SRC_2018_FLEISCHNER_WHITE_PAPER | Society white paper / expert consensus | Lynch et al. 2018 Fleischner Society Diagnostic Criteria for IPF White Paper | Verified comparative HRCT/IPF diagnostic criteria anchor, clinical probability framing, multidisciplinary diagnosis context | verified_comparative_anchor |
 | UIP_SRC_INTERNAL_V04_SOURCE_GOVERNANCE | Internal platform governance | v0.4 Evidence Layer / Source Review Governance | Source review rules, uncertainty preservation, citation sensitivity | internal_governance_anchor |
 | UIP_SRC_INTERNAL_V05_TEST_COVERAGE_SEAL | Internal platform governance | v0.5 Test Case Coverage Seal | Test coverage constraints, mimics, missing evidence, MDD/urgent review visibility | internal_governance_anchor |
 

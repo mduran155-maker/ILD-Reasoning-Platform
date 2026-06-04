@@ -65,7 +65,7 @@ This document does not add diagnostic authority.
 |---|---|
 | UIP_SRC_2018_ATS_ERS_JRS_ALAT_DX | HRCT pattern categories, alternative diagnosis features, acute exacerbation imaging context |
 | UIP_SRC_2022_ATS_ERS_JRS_ALAT_IPF_PPF | Current update / source hierarchy anchor |
-| UIP_SRC_2018_FLEISCHNER_WHITE_PAPER | Comparative expert consensus anchor; direct content not relied on unless separately verified |
+| UIP_SRC_2018_FLEISCHNER_WHITE_PAPER | Verified comparative expert consensus anchor from uploaded Lynch et al. 2018 Fleischner Society White Paper |
 | UIP_SRC_INTERNAL_V03_SUPERIMPOSED_EVENTS_CORE | Internal overlap / simultaneous-process reasoning inheritance |
 | UIP_SRC_INTERNAL_V04_SOURCE_GOVERNANCE | Source review and limitation governance |
 | UIP_SRC_INTERNAL_V05_TEST_COVERAGE_SEAL | Mimic, missing evidence, MDD, urgent review inheritance |
