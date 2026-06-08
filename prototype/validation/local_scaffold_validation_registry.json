@@ -1,0 +1,139 @@
+﻿{
+    "name":  "local_scaffold_validation_registry",
+    "version":  "v0.18.7",
+    "status":  "validation_registry_placeholder",
+    "scope":  "internal_synthetic_scaffold_safety_validation_registry",
+    "safety_label":  {
+                         "scope":  "internal_synthetic_preview_red_team_validation_placeholder_only",
+                         "real_patient_data":  "not_allowed",
+                         "deidentified_real_patient_data":  "not_allowed",
+                         "dicom_import":  "not_allowed",
+                         "hrct_import":  "not_allowed",
+                         "real_report_import":  "not_allowed",
+                         "pacs_connection":  "not_allowed",
+                         "ehr_connection":  "not_allowed",
+                         "diagnostic_authority":  "none",
+                         "treatment_authority":  "none",
+                         "clinical_validation":  "not_opened",
+                         "patient_facing_use":  "not_allowed",
+                         "public_ready":  false,
+                         "product_ready":  false,
+                         "mdd_replacement":  "not_allowed"
+                     },
+    "authority_envelope":  {
+                               "diagnostic_authority":  "none",
+                               "treatment_authority":  "none",
+                               "test_order_authority":  "none",
+                               "procedure_decision_authority":  "none",
+                               "follow_up_authority":  "none",
+                               "triage_authority":  "none",
+                               "patient_facing_use":  "not_allowed",
+                               "public_ready":  false,
+                               "product_ready":  false,
+                               "clinically_reviewed_platform_wide":  false,
+                               "real_patient_data":  "not_allowed",
+                               "deidentified_real_patient_data":  "not_allowed",
+                               "dicom_import":  "not_allowed",
+                               "hrct_import":  "not_allowed",
+                               "real_report_import":  "not_allowed",
+                               "pacs_connection":  "not_allowed",
+                               "ehr_connection":  "not_allowed",
+                               "clinical_validation":  "not_opened",
+                               "diagnostic_performance_claim":  "not_allowed",
+                               "mdd_replacement":  "not_allowed"
+                           },
+    "no_decision_object":  {
+                               "diagnosis_made":  false,
+                               "disease_excluded":  false,
+                               "mimic_excluded":  false,
+                               "treatment_selected":  false,
+                               "test_ordered":  false,
+                               "procedure_decided":  false,
+                               "follow_up_scheduled":  false,
+                               "triage_assigned":  false,
+                               "mdd_consensus_generated":  false,
+                               "patient_facing_output_generated":  false
+                           },
+    "registry_entries":  [
+                             {
+                                 "file":  "folder_namespace_validation_placeholder.json",
+                                 "role":  "folder namespace safety validation placeholder",
+                                 "disposition":  "scaffold_safety_only"
+                             },
+                             {
+                                 "file":  "route_screen_validation_placeholder.json",
+                                 "role":  "route and screen safety validation placeholder",
+                                 "disposition":  "scaffold_safety_only"
+                             },
+                             {
+                                 "file":  "component_state_validation_placeholder.json",
+                                 "role":  "component and state safety validation placeholder",
+                                 "disposition":  "scaffold_safety_only"
+                             },
+                             {
+                                 "file":  "synthetic_fixture_validation_placeholder.json",
+                                 "role":  "synthetic fixture safety validation placeholder",
+                                 "disposition":  "scaffold_safety_only"
+                             },
+                             {
+                                 "file":  "ui_copy_validation_placeholder.json",
+                                 "role":  "UI copy safety validation placeholder",
+                                 "disposition":  "scaffold_safety_only"
+                             },
+                             {
+                                 "file":  "fail_closed_disabled_audit_validation_placeholder.json",
+                                 "role":  "fail-closed disabled audit safety validation placeholder",
+                                 "disposition":  "scaffold_safety_only"
+                             },
+                             {
+                                 "file":  "export_red_team_validation_placeholder.json",
+                                 "role":  "export and red-team safety validation placeholder",
+                                 "disposition":  "scaffold_safety_only"
+                             },
+                             {
+                                 "file":  "no_real_patient_data_validation_placeholder.json",
+                                 "role":  "no real patient data validation placeholder",
+                                 "disposition":  "absence_validation_only"
+                             },
+                             {
+                                 "file":  "no_dicom_report_pacs_ehr_validation_placeholder.json",
+                                 "role":  "no DICOM report PACS EHR validation placeholder",
+                                 "disposition":  "absence_validation_only"
+                             },
+                             {
+                                 "file":  "no_clinical_validation_performance_validation_placeholder.json",
+                                 "role":  "no clinical validation performance validation placeholder",
+                                 "disposition":  "absence_validation_only"
+                             },
+                             {
+                                 "file":  "no_diagnosis_treatment_action_validation_placeholder.json",
+                                 "role":  "no diagnosis treatment action validation placeholder",
+                                 "disposition":  "absence_validation_only"
+                             },
+                             {
+                                 "file":  "no_patient_facing_mdd_replacement_validation_placeholder.json",
+                                 "role":  "no patient-facing MDD replacement validation placeholder",
+                                 "disposition":  "absence_validation_only"
+                             },
+                             {
+                                 "file":  "authority_envelope_validation_placeholder.json",
+                                 "role":  "authority envelope validation placeholder",
+                                 "disposition":  "boundary_validation_only"
+                             },
+                             {
+                                 "file":  "no_decision_object_validation_placeholder.json",
+                                 "role":  "no-decision object validation placeholder",
+                                 "disposition":  "boundary_validation_only"
+                             }
+                         ],
+    "registry_rule":  "Validation placeholders validate scaffold safety and boundary preservation only; they cannot validate clinical performance.",
+    "forbidden_meanings":  [
+                               "clinical validation",
+                               "diagnostic performance validation",
+                               "sensitivity specificity AUC validation",
+                               "expert equivalence validation",
+                               "regulatory validation",
+                               "public readiness validation",
+                               "product readiness validation"
+                           ]
+}

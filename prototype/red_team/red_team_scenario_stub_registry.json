@@ -1,0 +1,103 @@
+﻿{
+    "name":  "red_team_scenario_stub_registry",
+    "version":  "v0.18.7",
+    "status":  "red_team_registry_placeholder",
+    "scope":  "internal_synthetic_quarantine_registry",
+    "safety_label":  {
+                         "scope":  "internal_synthetic_preview_red_team_validation_placeholder_only",
+                         "real_patient_data":  "not_allowed",
+                         "deidentified_real_patient_data":  "not_allowed",
+                         "dicom_import":  "not_allowed",
+                         "hrct_import":  "not_allowed",
+                         "real_report_import":  "not_allowed",
+                         "pacs_connection":  "not_allowed",
+                         "ehr_connection":  "not_allowed",
+                         "diagnostic_authority":  "none",
+                         "treatment_authority":  "none",
+                         "clinical_validation":  "not_opened",
+                         "patient_facing_use":  "not_allowed",
+                         "public_ready":  false,
+                         "product_ready":  false,
+                         "mdd_replacement":  "not_allowed"
+                     },
+    "authority_envelope":  {
+                               "diagnostic_authority":  "none",
+                               "treatment_authority":  "none",
+                               "test_order_authority":  "none",
+                               "procedure_decision_authority":  "none",
+                               "follow_up_authority":  "none",
+                               "triage_authority":  "none",
+                               "patient_facing_use":  "not_allowed",
+                               "public_ready":  false,
+                               "product_ready":  false,
+                               "clinically_reviewed_platform_wide":  false,
+                               "real_patient_data":  "not_allowed",
+                               "deidentified_real_patient_data":  "not_allowed",
+                               "dicom_import":  "not_allowed",
+                               "hrct_import":  "not_allowed",
+                               "real_report_import":  "not_allowed",
+                               "pacs_connection":  "not_allowed",
+                               "ehr_connection":  "not_allowed",
+                               "clinical_validation":  "not_opened",
+                               "diagnostic_performance_claim":  "not_allowed",
+                               "mdd_replacement":  "not_allowed"
+                           },
+    "no_decision_object":  {
+                               "diagnosis_made":  false,
+                               "disease_excluded":  false,
+                               "mimic_excluded":  false,
+                               "treatment_selected":  false,
+                               "test_ordered":  false,
+                               "procedure_decided":  false,
+                               "follow_up_scheduled":  false,
+                               "triage_assigned":  false,
+                               "mdd_consensus_generated":  false,
+                               "patient_facing_output_generated":  false
+                           },
+    "registry_entries":  [
+                             {
+                                 "file":  "red_team_scenario_detail_structure.json",
+                                 "role":  "red-team scenario detail structure placeholder",
+                                 "disposition":  "quarantine_only"
+                             },
+                             {
+                                 "file":  "red_team_quarantine_display_stub.json",
+                                 "role":  "red-team quarantine display placeholder",
+                                 "disposition":  "quarantine_only"
+                             },
+                             {
+                                 "file":  "red_team_copy_export_block.json",
+                                 "role":  "red-team copy export block placeholder",
+                                 "disposition":  "block_unsafe_export"
+                             },
+                             {
+                                 "file":  "red_team_repair_revalidation_stub.json",
+                                 "role":  "red-team repair and revalidation placeholder",
+                                 "disposition":  "repair_then_revalidate"
+                             },
+                             {
+                                 "file":  "red_team_audit_binding.json",
+                                 "role":  "red-team audit binding placeholder",
+                                 "disposition":  "traceability_only"
+                             },
+                             {
+                                 "file":  "red_team_blocked_meanings.json",
+                                 "role":  "red-team blocked meanings placeholder",
+                                 "disposition":  "prevention_only"
+                             },
+                             {
+                                 "file":  "red_team_validation_rules.json",
+                                 "role":  "red-team validation rules placeholder",
+                                 "disposition":  "containment_validation_only"
+                             }
+                         ],
+    "registry_rule":  "Red-team stubs demonstrate containment only and cannot become reusable unsafe output.",
+    "forbidden_meanings":  [
+                               "unsafe copy library",
+                               "clinical phrase template",
+                               "bypass instruction",
+                               "exploit library",
+                               "clinical validation cohort",
+                               "product-readiness test suite"
+                           ]
+}

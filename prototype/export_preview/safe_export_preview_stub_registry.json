@@ -1,0 +1,119 @@
+﻿{
+    "name":  "safe_export_preview_stub_registry",
+    "version":  "v0.18.7",
+    "status":  "export_preview_registry_placeholder",
+    "scope":  "internal_synthetic_safe_preview_registry",
+    "safety_label":  {
+                         "scope":  "internal_synthetic_preview_red_team_validation_placeholder_only",
+                         "real_patient_data":  "not_allowed",
+                         "deidentified_real_patient_data":  "not_allowed",
+                         "dicom_import":  "not_allowed",
+                         "hrct_import":  "not_allowed",
+                         "real_report_import":  "not_allowed",
+                         "pacs_connection":  "not_allowed",
+                         "ehr_connection":  "not_allowed",
+                         "diagnostic_authority":  "none",
+                         "treatment_authority":  "none",
+                         "clinical_validation":  "not_opened",
+                         "patient_facing_use":  "not_allowed",
+                         "public_ready":  false,
+                         "product_ready":  false,
+                         "mdd_replacement":  "not_allowed"
+                     },
+    "authority_envelope":  {
+                               "diagnostic_authority":  "none",
+                               "treatment_authority":  "none",
+                               "test_order_authority":  "none",
+                               "procedure_decision_authority":  "none",
+                               "follow_up_authority":  "none",
+                               "triage_authority":  "none",
+                               "patient_facing_use":  "not_allowed",
+                               "public_ready":  false,
+                               "product_ready":  false,
+                               "clinically_reviewed_platform_wide":  false,
+                               "real_patient_data":  "not_allowed",
+                               "deidentified_real_patient_data":  "not_allowed",
+                               "dicom_import":  "not_allowed",
+                               "hrct_import":  "not_allowed",
+                               "real_report_import":  "not_allowed",
+                               "pacs_connection":  "not_allowed",
+                               "ehr_connection":  "not_allowed",
+                               "clinical_validation":  "not_opened",
+                               "diagnostic_performance_claim":  "not_allowed",
+                               "mdd_replacement":  "not_allowed"
+                           },
+    "no_decision_object":  {
+                               "diagnosis_made":  false,
+                               "disease_excluded":  false,
+                               "mimic_excluded":  false,
+                               "treatment_selected":  false,
+                               "test_ordered":  false,
+                               "procedure_decided":  false,
+                               "follow_up_scheduled":  false,
+                               "triage_assigned":  false,
+                               "mdd_consensus_generated":  false,
+                               "patient_facing_output_generated":  false
+                           },
+    "registry_entries":  [
+                             {
+                                 "file":  "export_section_stub_registry.json",
+                                 "role":  "export section registry placeholder",
+                                 "disposition":  "preview_only"
+                             },
+                             {
+                                 "file":  "export_safety_check_stub.json",
+                                 "role":  "export safety check placeholder",
+                                 "disposition":  "preview_only_fail_closed"
+                             },
+                             {
+                                 "file":  "unsafe_heading_detector_stub.json",
+                                 "role":  "unsafe heading detector placeholder",
+                                 "disposition":  "detector_only_fail_closed"
+                             },
+                             {
+                                 "file":  "unsafe_language_detector_stub.json",
+                                 "role":  "unsafe language detector placeholder",
+                                 "disposition":  "detector_only_fail_closed"
+                             },
+                             {
+                                 "file":  "copy_export_block_stub.json",
+                                 "role":  "copy export block placeholder",
+                                 "disposition":  "block_unsafe_export"
+                             },
+                             {
+                                 "file":  "export_preview_state_machine.json",
+                                 "role":  "export preview state machine placeholder",
+                                 "disposition":  "preview_state_only"
+                             },
+                             {
+                                 "file":  "export_preview_section_order.json",
+                                 "role":  "export preview section order placeholder",
+                                 "disposition":  "safe_preview_order_only"
+                             },
+                             {
+                                 "file":  "export_preview_boundary_copy_binding.json",
+                                 "role":  "export preview boundary copy binding placeholder",
+                                 "disposition":  "safe_boundary_copy_only"
+                             },
+                             {
+                                 "file":  "export_preview_audit_binding.json",
+                                 "role":  "export preview audit binding placeholder",
+                                 "disposition":  "traceability_only"
+                             },
+                             {
+                                 "file":  "export_preview_validation_rules.json",
+                                 "role":  "export preview validation rules placeholder",
+                                 "disposition":  "scaffold_safety_only"
+                             }
+                         ],
+    "registry_rule":  "Export preview stubs are safe preview placeholders only and cannot generate clinical reports.",
+    "forbidden_meanings":  [
+                               "clinical report generator",
+                               "impression generator",
+                               "diagnosis exporter",
+                               "treatment exporter",
+                               "order exporter",
+                               "patient-facing exporter",
+                               "MDD final consensus exporter"
+                           ]
+}
