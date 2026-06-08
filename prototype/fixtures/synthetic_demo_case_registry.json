@@ -1,0 +1,87 @@
+﻿{
+    "fixture_name":  "synthetic_demo_case_registry",
+    "version":  "v0.18.4",
+    "status":  "fixture_registry_placeholder",
+    "scope":  "internal_synthetic_non_clinical_registry",
+    "safety_label":  {
+                         "scope":  "internal_synthetic_fixture_placeholder_only",
+                         "real_patient_data":  "not_allowed",
+                         "deidentified_real_patient_data":  "not_allowed",
+                         "dicom_import":  "not_allowed",
+                         "hrct_import":  "not_allowed",
+                         "real_report_import":  "not_allowed",
+                         "pacs_connection":  "not_allowed",
+                         "ehr_connection":  "not_allowed",
+                         "diagnostic_authority":  "none",
+                         "treatment_authority":  "none",
+                         "clinical_validation":  "not_opened",
+                         "patient_facing_use":  "not_allowed",
+                         "public_ready":  false,
+                         "product_ready":  false,
+                         "mdd_replacement":  "not_allowed"
+                     },
+    "authority_envelope":  {
+                               "diagnostic_authority":  "none",
+                               "treatment_authority":  "none",
+                               "test_order_authority":  "none",
+                               "procedure_decision_authority":  "none",
+                               "follow_up_authority":  "none",
+                               "triage_authority":  "none",
+                               "patient_facing_use":  "not_allowed",
+                               "public_ready":  false,
+                               "product_ready":  false,
+                               "clinically_reviewed_platform_wide":  false,
+                               "real_patient_data":  "not_allowed",
+                               "deidentified_real_patient_data":  "not_allowed",
+                               "dicom_import":  "not_allowed",
+                               "hrct_import":  "not_allowed",
+                               "real_report_import":  "not_allowed",
+                               "pacs_connection":  "not_allowed",
+                               "ehr_connection":  "not_allowed",
+                               "clinical_validation":  "not_opened",
+                               "diagnostic_performance_claim":  "not_allowed",
+                               "mdd_replacement":  "not_allowed"
+                           },
+    "no_decision_object":  {
+                               "diagnosis_made":  false,
+                               "disease_excluded":  false,
+                               "mimic_excluded":  false,
+                               "treatment_selected":  false,
+                               "test_ordered":  false,
+                               "procedure_decided":  false,
+                               "follow_up_scheduled":  false,
+                               "triage_assigned":  false,
+                               "mdd_consensus_generated":  false,
+                               "patient_facing_output_generated":  false
+                           },
+    "registry_entries":  [
+                             {
+                                 "synthetic_case_id":  "synthetic_demo_case_001",
+                                 "file":  "synthetic_demo_case_001.json",
+                                 "role":  "missing_evidence_visibility_demo",
+                                 "clinical_meaning":  "none",
+                                 "diagnostic_ground_truth":  "not_provided"
+                             },
+                             {
+                                 "synthetic_case_id":  "synthetic_demo_case_002",
+                                 "file":  "synthetic_demo_case_002.json",
+                                 "role":  "mimic_visibility_demo",
+                                 "clinical_meaning":  "none",
+                                 "diagnostic_ground_truth":  "not_provided"
+                             },
+                             {
+                                 "synthetic_case_id":  "synthetic_demo_case_003",
+                                 "file":  "synthetic_demo_case_003.json",
+                                 "role":  "overlap_and_uncertainty_demo",
+                                 "clinical_meaning":  "none",
+                                 "diagnostic_ground_truth":  "not_provided"
+                             }
+                         ],
+    "blocked_registry_meanings":  [
+                                      "not a patient registry",
+                                      "not a clinical case registry",
+                                      "not a validation cohort",
+                                      "not diagnostic ground truth",
+                                      "not product data"
+                                  ]
+}
