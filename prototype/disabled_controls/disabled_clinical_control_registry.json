@@ -1,0 +1,99 @@
+﻿{
+    "name":  "disabled_clinical_control_registry",
+    "version":  "v0.18.6",
+    "status":  "disabled_control_registry_placeholder",
+    "scope":  "internal_synthetic_disabled_control_registry",
+    "safety_label":  {
+                         "scope":  "internal_synthetic_containment_traceability_placeholder_only",
+                         "real_patient_data":  "not_allowed",
+                         "deidentified_real_patient_data":  "not_allowed",
+                         "dicom_import":  "not_allowed",
+                         "hrct_import":  "not_allowed",
+                         "real_report_import":  "not_allowed",
+                         "pacs_connection":  "not_allowed",
+                         "ehr_connection":  "not_allowed",
+                         "diagnostic_authority":  "none",
+                         "treatment_authority":  "none",
+                         "clinical_validation":  "not_opened",
+                         "patient_facing_use":  "not_allowed",
+                         "public_ready":  false,
+                         "product_ready":  false,
+                         "mdd_replacement":  "not_allowed"
+                     },
+    "authority_envelope":  {
+                               "diagnostic_authority":  "none",
+                               "treatment_authority":  "none",
+                               "test_order_authority":  "none",
+                               "procedure_decision_authority":  "none",
+                               "follow_up_authority":  "none",
+                               "triage_authority":  "none",
+                               "patient_facing_use":  "not_allowed",
+                               "public_ready":  false,
+                               "product_ready":  false,
+                               "clinically_reviewed_platform_wide":  false,
+                               "real_patient_data":  "not_allowed",
+                               "deidentified_real_patient_data":  "not_allowed",
+                               "dicom_import":  "not_allowed",
+                               "hrct_import":  "not_allowed",
+                               "real_report_import":  "not_allowed",
+                               "pacs_connection":  "not_allowed",
+                               "ehr_connection":  "not_allowed",
+                               "clinical_validation":  "not_opened",
+                               "diagnostic_performance_claim":  "not_allowed",
+                               "mdd_replacement":  "not_allowed"
+                           },
+    "no_decision_object":  {
+                               "diagnosis_made":  false,
+                               "disease_excluded":  false,
+                               "mimic_excluded":  false,
+                               "treatment_selected":  false,
+                               "test_ordered":  false,
+                               "procedure_decided":  false,
+                               "follow_up_scheduled":  false,
+                               "triage_assigned":  false,
+                               "mdd_consensus_generated":  false,
+                               "patient_facing_output_generated":  false
+                           },
+    "registry_entries":  [
+                             {
+                                 "file":  "disabled_control_copy_mapping.json",
+                                 "role":  "disabled control copy mapping",
+                                 "disposition":  "disabled_non_activatable"
+                             },
+                             {
+                                 "file":  "disabled_data_import_controls.json",
+                                 "role":  "disabled real/deidentified/DICOM/report data import controls",
+                                 "disposition":  "disabled_non_activatable"
+                             },
+                             {
+                                 "file":  "disabled_diagnosis_action_controls.json",
+                                 "role":  "disabled diagnosis/action controls",
+                                 "disposition":  "disabled_non_activatable"
+                             },
+                             {
+                                 "file":  "disabled_patient_facing_controls.json",
+                                 "role":  "disabled patient-facing controls",
+                                 "disposition":  "disabled_non_activatable"
+                             },
+                             {
+                                 "file":  "disabled_validation_readiness_controls.json",
+                                 "role":  "disabled clinical validation/readiness controls",
+                                 "disposition":  "disabled_non_activatable"
+                             },
+                             {
+                                 "file":  "disabled_mdd_consensus_controls.json",
+                                 "role":  "disabled MDD consensus controls",
+                                 "disposition":  "disabled_non_activatable"
+                             }
+                         ],
+    "registry_rule":  "Disabled controls explain blocked clinical authority and cannot be activated as hidden features.",
+    "forbidden_meanings":  [
+                               "feature flag",
+                               "hidden button",
+                               "clinical toggle",
+                               "diagnostic action",
+                               "treatment action",
+                               "patient-facing action",
+                               "validation launch"
+                           ]
+}

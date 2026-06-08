@@ -1,0 +1,144 @@
+﻿{
+    "name":  "fail_closed_stub_registry",
+    "version":  "v0.18.6",
+    "status":  "fail_closed_registry_placeholder",
+    "scope":  "internal_synthetic_stop_state_registry",
+    "safety_label":  {
+                         "scope":  "internal_synthetic_containment_traceability_placeholder_only",
+                         "real_patient_data":  "not_allowed",
+                         "deidentified_real_patient_data":  "not_allowed",
+                         "dicom_import":  "not_allowed",
+                         "hrct_import":  "not_allowed",
+                         "real_report_import":  "not_allowed",
+                         "pacs_connection":  "not_allowed",
+                         "ehr_connection":  "not_allowed",
+                         "diagnostic_authority":  "none",
+                         "treatment_authority":  "none",
+                         "clinical_validation":  "not_opened",
+                         "patient_facing_use":  "not_allowed",
+                         "public_ready":  false,
+                         "product_ready":  false,
+                         "mdd_replacement":  "not_allowed"
+                     },
+    "authority_envelope":  {
+                               "diagnostic_authority":  "none",
+                               "treatment_authority":  "none",
+                               "test_order_authority":  "none",
+                               "procedure_decision_authority":  "none",
+                               "follow_up_authority":  "none",
+                               "triage_authority":  "none",
+                               "patient_facing_use":  "not_allowed",
+                               "public_ready":  false,
+                               "product_ready":  false,
+                               "clinically_reviewed_platform_wide":  false,
+                               "real_patient_data":  "not_allowed",
+                               "deidentified_real_patient_data":  "not_allowed",
+                               "dicom_import":  "not_allowed",
+                               "hrct_import":  "not_allowed",
+                               "real_report_import":  "not_allowed",
+                               "pacs_connection":  "not_allowed",
+                               "ehr_connection":  "not_allowed",
+                               "clinical_validation":  "not_opened",
+                               "diagnostic_performance_claim":  "not_allowed",
+                               "mdd_replacement":  "not_allowed"
+                           },
+    "no_decision_object":  {
+                               "diagnosis_made":  false,
+                               "disease_excluded":  false,
+                               "mimic_excluded":  false,
+                               "treatment_selected":  false,
+                               "test_ordered":  false,
+                               "procedure_decided":  false,
+                               "follow_up_scheduled":  false,
+                               "triage_assigned":  false,
+                               "mdd_consensus_generated":  false,
+                               "patient_facing_output_generated":  false
+                           },
+    "registry_entries":  [
+                             {
+                                 "file":  "unsafe_route_attempt_stub.json",
+                                 "role":  "unsafe route attempt stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "real_patient_data_attempt_stub.json",
+                                 "role":  "real patient data attempt stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "deidentified_patient_data_attempt_stub.json",
+                                 "role":  "deidentified patient data attempt stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "dicom_report_import_attempt_stub.json",
+                                 "role":  "DICOM or report import attempt stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "pacs_ehr_connection_attempt_stub.json",
+                                 "role":  "PACS or EHR connection attempt stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "diagnosis_action_attempt_stub.json",
+                                 "role":  "diagnosis action attempt stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "patient_facing_leak_attempt_stub.json",
+                                 "role":  "patient-facing leak attempt stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "validation_readiness_overclaim_stub.json",
+                                 "role":  "validation readiness overclaim stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "unsafe_copy_export_attempt_stub.json",
+                                 "role":  "unsafe copy export attempt stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "authority_no_decision_missing_stub.json",
+                                 "role":  "authority envelope or no-decision missing stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "unsafe_visual_semantics_stub.json",
+                                 "role":  "unsafe visual semantics stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "unsafe_fixture_binding_stub.json",
+                                 "role":  "unsafe fixture binding stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "audit_correctness_claim_stub.json",
+                                 "role":  "audit correctness claim stop-state",
+                                 "disposition":  "fail_closed_stop_state"
+                             },
+                             {
+                                 "file":  "ui_safety_repair_required_stub.json",
+                                 "role":  "UI safety repair required stop-state",
+                                 "disposition":  "fail_closed_until_repaired"
+                             },
+                             {
+                                 "file":  "ui_safety_revalidation_stub.json",
+                                 "role":  "UI safety revalidation required stop-state",
+                                 "disposition":  "fail_closed_until_revalidated"
+                             }
+                         ],
+    "registry_rule":  "Fail-closed stubs are stop-state placeholders only and cannot provide proceed-anyway behavior.",
+    "forbidden_meanings":  [
+                               "warning only",
+                               "override available",
+                               "continue anyway",
+                               "hidden clinical action",
+                               "clinical fallback",
+                               "diagnostic recovery path",
+                               "treatment recovery path"
+                           ]
+}
