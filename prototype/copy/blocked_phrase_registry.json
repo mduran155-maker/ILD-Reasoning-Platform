@@ -1,0 +1,142 @@
+﻿{
+    "copy_name":  "blocked_phrase_registry",
+    "version":  "v0.18.5",
+    "status":  "blocked_phrase_registry_placeholder",
+    "scope":  "prevention_only_non_reusable",
+    "safety_label":  {
+                         "scope":  "internal_synthetic_ui_copy_placeholder_only",
+                         "copy_authority":  "safety_language_only",
+                         "real_patient_data":  "not_allowed",
+                         "deidentified_real_patient_data":  "not_allowed",
+                         "diagnostic_authority":  "none",
+                         "treatment_authority":  "none",
+                         "clinical_validation":  "not_opened",
+                         "patient_facing_use":  "not_allowed",
+                         "public_ready":  false,
+                         "product_ready":  false,
+                         "mdd_replacement":  "not_allowed"
+                     },
+    "authority_envelope":  {
+                               "diagnostic_authority":  "none",
+                               "treatment_authority":  "none",
+                               "test_order_authority":  "none",
+                               "procedure_decision_authority":  "none",
+                               "follow_up_authority":  "none",
+                               "triage_authority":  "none",
+                               "patient_facing_use":  "not_allowed",
+                               "public_ready":  false,
+                               "product_ready":  false,
+                               "clinically_reviewed_platform_wide":  false,
+                               "real_patient_data":  "not_allowed",
+                               "deidentified_real_patient_data":  "not_allowed",
+                               "dicom_import":  "not_allowed",
+                               "hrct_import":  "not_allowed",
+                               "real_report_import":  "not_allowed",
+                               "pacs_connection":  "not_allowed",
+                               "ehr_connection":  "not_allowed",
+                               "clinical_validation":  "not_opened",
+                               "diagnostic_performance_claim":  "not_allowed",
+                               "mdd_replacement":  "not_allowed"
+                           },
+    "no_decision_object":  {
+                               "diagnosis_made":  false,
+                               "disease_excluded":  false,
+                               "mimic_excluded":  false,
+                               "treatment_selected":  false,
+                               "test_ordered":  false,
+                               "procedure_decided":  false,
+                               "follow_up_scheduled":  false,
+                               "triage_assigned":  false,
+                               "mdd_consensus_generated":  false,
+                               "patient_facing_output_generated":  false
+                           },
+    "registry_rule":  "Blocked phrases exist only to detect and prevent unsafe copy. They must not become reusable clinical copy.",
+    "blocked_phrase_families":  [
+                                    {
+                                        "family":  "diagnosis",
+                                        "examples":  [
+                                                         "diagnosis is",
+                                                         "consistent with",
+                                                         "final diagnosis"
+                                                     ]
+                                    },
+                                    {
+                                        "family":  "exclusion",
+                                        "examples":  [
+                                                         "rules out",
+                                                         "excludes",
+                                                         "no evidence of"
+                                                     ]
+                                    },
+                                    {
+                                        "family":  "probability",
+                                        "examples":  [
+                                                         "most likely",
+                                                         "high probability",
+                                                         "ranked first"
+                                                     ]
+                                    },
+                                    {
+                                        "family":  "treatment",
+                                        "examples":  [
+                                                         "start treatment",
+                                                         "recommend therapy",
+                                                         "manage with"
+                                                     ]
+                                    },
+                                    {
+                                        "family":  "orders",
+                                        "examples":  [
+                                                         "order test",
+                                                         "perform procedure",
+                                                         "schedule follow-up"
+                                                     ]
+                                    },
+                                    {
+                                        "family":  "triage",
+                                        "examples":  [
+                                                         "urgent triage",
+                                                         "discharge",
+                                                         "admit"
+                                                     ]
+                                    },
+                                    {
+                                        "family":  "patient_facing",
+                                        "examples":  [
+                                                         "you have",
+                                                         "your disease",
+                                                         "you should"
+                                                     ]
+                                    },
+                                    {
+                                        "family":  "validation",
+                                        "examples":  [
+                                                         "clinically validated",
+                                                         "high accuracy",
+                                                         "expert equivalent"
+                                                     ]
+                                    },
+                                    {
+                                        "family":  "readiness",
+                                        "examples":  [
+                                                         "public ready",
+                                                         "product ready",
+                                                         "approved for use"
+                                                     ]
+                                    },
+                                    {
+                                        "family":  "mdd_consensus",
+                                        "examples":  [
+                                                         "MDD consensus is",
+                                                         "final board decision",
+                                                         "team diagnosis"
+                                                     ]
+                                    }
+                                ],
+    "use_policy":  {
+                       "detector_only":  true,
+                       "reusable_copy":  false,
+                       "clinical_template":  false,
+                       "repair_requires_authority_reduction":  true
+                   }
+}

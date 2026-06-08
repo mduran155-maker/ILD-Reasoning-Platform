@@ -1,0 +1,86 @@
+﻿{
+    "copy_name":  "copy_repair_rules",
+    "version":  "v0.18.5",
+    "status":  "copy_repair_rules_placeholder",
+    "scope":  "authority_reduction_only",
+    "safety_label":  {
+                         "scope":  "internal_synthetic_ui_copy_placeholder_only",
+                         "copy_authority":  "safety_language_only",
+                         "real_patient_data":  "not_allowed",
+                         "deidentified_real_patient_data":  "not_allowed",
+                         "diagnostic_authority":  "none",
+                         "treatment_authority":  "none",
+                         "clinical_validation":  "not_opened",
+                         "patient_facing_use":  "not_allowed",
+                         "public_ready":  false,
+                         "product_ready":  false,
+                         "mdd_replacement":  "not_allowed"
+                     },
+    "authority_envelope":  {
+                               "diagnostic_authority":  "none",
+                               "treatment_authority":  "none",
+                               "test_order_authority":  "none",
+                               "procedure_decision_authority":  "none",
+                               "follow_up_authority":  "none",
+                               "triage_authority":  "none",
+                               "patient_facing_use":  "not_allowed",
+                               "public_ready":  false,
+                               "product_ready":  false,
+                               "clinically_reviewed_platform_wide":  false,
+                               "real_patient_data":  "not_allowed",
+                               "deidentified_real_patient_data":  "not_allowed",
+                               "dicom_import":  "not_allowed",
+                               "hrct_import":  "not_allowed",
+                               "real_report_import":  "not_allowed",
+                               "pacs_connection":  "not_allowed",
+                               "ehr_connection":  "not_allowed",
+                               "clinical_validation":  "not_opened",
+                               "diagnostic_performance_claim":  "not_allowed",
+                               "mdd_replacement":  "not_allowed"
+                           },
+    "no_decision_object":  {
+                               "diagnosis_made":  false,
+                               "disease_excluded":  false,
+                               "mimic_excluded":  false,
+                               "treatment_selected":  false,
+                               "test_ordered":  false,
+                               "procedure_decided":  false,
+                               "follow_up_scheduled":  false,
+                               "triage_assigned":  false,
+                               "mdd_consensus_generated":  false,
+                               "patient_facing_output_generated":  false
+                           },
+    "repair_policy":  {
+                          "repair_goal":  "reduce clinical authority and preserve uncertainty",
+                          "may_rewrite_to":  [
+                                                 "non-clinical boundary language",
+                                                 "source status language",
+                                                 "missing evidence language",
+                                                 "mimic visibility language",
+                                                 "overlap visibility language",
+                                                 "confidence limitation language",
+                                                 "review required language",
+                                                 "fail-closed language"
+                                             ],
+                          "must_not_rewrite_to":  [
+                                                      "diagnosis language",
+                                                      "disease exclusion language",
+                                                      "probability or ranking language",
+                                                      "treatment language",
+                                                      "test-order language",
+                                                      "procedure language",
+                                                      "follow-up language",
+                                                      "triage language",
+                                                      "patient-facing language",
+                                                      "clinical validation language",
+                                                      "product readiness language",
+                                                      "MDD consensus language"
+                                                  ],
+                          "unsafe_copy_disposition":  "fail_closed_until_repaired_and_revalidated"
+                      },
+    "example_repair_pattern":  {
+                                   "unsafe_meaning":  "diagnostic closure",
+                                   "repaired_meaning":  "reasoning boundary with human review required",
+                                   "reusable_as_clinical_phrase":  false
+                               }
+}

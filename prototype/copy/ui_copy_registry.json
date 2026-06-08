@@ -1,0 +1,155 @@
+﻿{
+    "copy_name":  "ui_copy_registry",
+    "version":  "v0.18.5",
+    "status":  "ui_copy_registry_placeholder",
+    "scope":  "internal_synthetic_non_clinical_safety_copy_registry",
+    "safety_label":  {
+                         "scope":  "internal_synthetic_ui_copy_placeholder_only",
+                         "copy_authority":  "safety_language_only",
+                         "real_patient_data":  "not_allowed",
+                         "deidentified_real_patient_data":  "not_allowed",
+                         "diagnostic_authority":  "none",
+                         "treatment_authority":  "none",
+                         "clinical_validation":  "not_opened",
+                         "patient_facing_use":  "not_allowed",
+                         "public_ready":  false,
+                         "product_ready":  false,
+                         "mdd_replacement":  "not_allowed"
+                     },
+    "authority_envelope":  {
+                               "diagnostic_authority":  "none",
+                               "treatment_authority":  "none",
+                               "test_order_authority":  "none",
+                               "procedure_decision_authority":  "none",
+                               "follow_up_authority":  "none",
+                               "triage_authority":  "none",
+                               "patient_facing_use":  "not_allowed",
+                               "public_ready":  false,
+                               "product_ready":  false,
+                               "clinically_reviewed_platform_wide":  false,
+                               "real_patient_data":  "not_allowed",
+                               "deidentified_real_patient_data":  "not_allowed",
+                               "dicom_import":  "not_allowed",
+                               "hrct_import":  "not_allowed",
+                               "real_report_import":  "not_allowed",
+                               "pacs_connection":  "not_allowed",
+                               "ehr_connection":  "not_allowed",
+                               "clinical_validation":  "not_opened",
+                               "diagnostic_performance_claim":  "not_allowed",
+                               "mdd_replacement":  "not_allowed"
+                           },
+    "no_decision_object":  {
+                               "diagnosis_made":  false,
+                               "disease_excluded":  false,
+                               "mimic_excluded":  false,
+                               "treatment_selected":  false,
+                               "test_ordered":  false,
+                               "procedure_decided":  false,
+                               "follow_up_scheduled":  false,
+                               "triage_assigned":  false,
+                               "mdd_consensus_generated":  false,
+                               "patient_facing_output_generated":  false
+                           },
+    "registry_entries":  [
+                             {
+                                 "file":  "safety_language_core.json",
+                                 "role":  "core safety language placeholder",
+                                 "type":  "safety_language_core"
+                             },
+                             {
+                                 "file":  "route_copy_mapping.json",
+                                 "role":  "route copy mapping placeholder",
+                                 "type":  "route_copy_mapping"
+                             },
+                             {
+                                 "file":  "screen_copy_mapping.json",
+                                 "role":  "screen copy mapping placeholder",
+                                 "type":  "screen_copy_mapping"
+                             },
+                             {
+                                 "file":  "component_copy_mapping.json",
+                                 "role":  "component copy mapping placeholder",
+                                 "type":  "component_copy_mapping"
+                             },
+                             {
+                                 "file":  "disabled_control_copy_mapping.json",
+                                 "role":  "disabled control copy mapping placeholder",
+                                 "type":  "disabled_control_copy_mapping"
+                             },
+                             {
+                                 "file":  "fail_closed_copy_mapping.json",
+                                 "role":  "fail closed copy mapping placeholder",
+                                 "type":  "fail_closed_copy_mapping"
+                             },
+                             {
+                                 "file":  "export_preview_copy_mapping.json",
+                                 "role":  "export preview copy mapping placeholder",
+                                 "type":  "export_preview_copy_mapping"
+                             },
+                             {
+                                 "file":  "red_team_quarantine_copy_mapping.json",
+                                 "role":  "red team quarantine copy mapping placeholder",
+                                 "type":  "red_team_quarantine_copy_mapping"
+                             },
+                             {
+                                 "file":  "visual_safety_copy.json",
+                                 "role":  "visual safety copy placeholder",
+                                 "type":  "visual_safety_copy"
+                             },
+                             {
+                                 "file":  "authority_envelope_copy.json",
+                                 "role":  "authority envelope copy placeholder",
+                                 "type":  "authority_envelope_copy"
+                             },
+                             {
+                                 "file":  "no_decision_object_copy.json",
+                                 "role":  "no decision object copy placeholder",
+                                 "type":  "no_decision_object_copy"
+                             },
+                             {
+                                 "file":  "missing_evidence_copy.json",
+                                 "role":  "missing evidence copy placeholder",
+                                 "type":  "missing_evidence_copy"
+                             },
+                             {
+                                 "file":  "mimic_visibility_copy.json",
+                                 "role":  "mimic visibility copy placeholder",
+                                 "type":  "mimic_visibility_copy"
+                             },
+                             {
+                                 "file":  "overlap_copy.json",
+                                 "role":  "overlap copy placeholder",
+                                 "type":  "overlap_copy"
+                             },
+                             {
+                                 "file":  "source_status_copy.json",
+                                 "role":  "source status copy placeholder",
+                                 "type":  "source_status_copy"
+                             },
+                             {
+                                 "file":  "confidence_limiter_copy.json",
+                                 "role":  "confidence limiter copy placeholder",
+                                 "type":  "confidence_limiter_copy"
+                             },
+                             {
+                                 "file":  "review_prompt_copy.json",
+                                 "role":  "review prompt copy placeholder",
+                                 "type":  "review_prompt_copy"
+                             },
+                             {
+                                 "file":  "audit_trace_copy.json",
+                                 "role":  "audit trace copy placeholder",
+                                 "type":  "audit_trace_copy"
+                             }
+                         ],
+    "registry_rule":  "UI copy entries are safety-language-only placeholders and cannot be reused as clinical recommendation copy.",
+    "blocked_registry_meanings":  [
+                                      "not a diagnosis phrase registry",
+                                      "not a final impression template registry",
+                                      "not a treatment recommendation registry",
+                                      "not a patient-facing copy registry",
+                                      "not a clinical validation claim registry",
+                                      "not a product marketing claim registry",
+                                      "not an MDD consensus registry"
+                                  ]
+}
